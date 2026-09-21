@@ -1,3 +1,15 @@
+---
+title: ③ Linux 零基础入门教程
+published: 2026-09-21
+image: ""
+tags: [Linux, 知识点]
+category: "JavaSE"
+draft: false
+description: Linux基础指令的使用
+lang: zh-CN
+comment: true
+---
+
 # 🐧 Linux 零基础入门教程
 
 > 从 VMware 虚拟机安装开始，系统学习 Linux 常用命令、软件管理、Vim、权限、网络、进程与 SSH。
