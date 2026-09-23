@@ -1,5 +1,7 @@
 <script lang="ts">
-import type { StandardizedAnime } from "@/types/anime";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import type { StandardizedAnime } from "@/types/bilibili";
 
 interface Props {
 	anime: StandardizedAnime;
@@ -8,34 +10,64 @@ interface Props {
 
 let { anime, onclick }: Props = $props();
 
+function handleLoad(e: Event) {
+	const img = e.currentTarget as HTMLImageElement;
+	img.style.opacity = "1";
+	const ph = img.parentElement?.querySelector(".lqip-placeholder");
+	if (ph) ph.classList.add("loaded");
+}
+
 function handleClick() {
 	onclick?.(anime);
 }
 
-function getTypeLabel(type: string): string {
-	return type === "movie" ? "剧场版" : "TV";
+const SEASON_TYPE_I18N: Record<number, I18nKey> = {
+	1: I18nKey.animeTypeAnime,
+	2: I18nKey.animeTypeMovie,
+	3: I18nKey.animeTypeDocumentary,
+	4: I18nKey.animeTypeChinese,
+	5: I18nKey.animeTypeDrama,
+	7: I18nKey.animeTypeConcert,
+};
+
+const SEASON_TYPE_COLORS: Record<number, string> = {
+	1: "bg-blue-500",
+	2: "bg-purple-500",
+	3: "bg-emerald-500",
+	4: "bg-orange-500",
+	5: "bg-pink-500",
+	7: "bg-yellow-500",
+};
+
+function getTypeLabel(seasonType: number): string {
+	return i18n(SEASON_TYPE_I18N[seasonType] || I18nKey.animeTypeAnime);
 }
 
-function getTypeColor(type: string): string {
-	return type === "movie" ? "bg-purple-500" : "bg-blue-500";
+function getTypeColor(seasonType: number): string {
+	return SEASON_TYPE_COLORS[seasonType] || "bg-gray-500";
 }
 </script>
 
 <div
-	class="anime-card group relative overflow-hidden rounded-xl border border-(--line-divider) bg-(--card-bg) cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-(--primary)/30 hover:-translate-y-1"
+	class="media-card group relative overflow-hidden rounded-xl border border-(--line-divider) bg-(--card-bg) cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-(--primary)/30 hover:-translate-y-1"
 	onclick={handleClick}
 	onkeydown={(e) => e.key === "Enter" && handleClick()}
 	role="button"
 	tabindex="0"
 >
 	<!-- 海报 -->
-	<div class="relative aspect-[2/3] overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+	<div class="relative aspect-2/3 overflow-hidden bg-neutral-100 dark:bg-neutral-800">
 		{#if anime.poster}
+			<div class="lqip-placeholder absolute inset-0 pointer-events-none" style="background: var(--muted)" aria-hidden="true"></div>
 			<img
 				src={anime.poster}
 				alt={anime.title}
-				class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-				loading="lazy"
+				class="h-full w-full object-cover transition-all duration-500 group-hover:scale-110 opacity-0"
+				loading="eager"
+				decoding="async"
+				referrerpolicy="no-referrer"
+				crossorigin="anonymous"
+				onload={handleLoad}
 			/>
 		{:else}
 			<div class="flex h-full w-full items-center justify-center">
@@ -56,21 +88,21 @@ function getTypeColor(type: string): string {
 		{/if}
 
 		<!-- 类型角标（左上） -->
-		<div class="absolute top-2 left-2 rounded-lg {getTypeColor(anime.type)} px-2 py-1 text-xs font-bold text-white backdrop-blur-sm">
-			{getTypeLabel(anime.type)}
+		<div class="absolute top-2 left-2 rounded-lg {getTypeColor(anime.season_type)} px-2 py-1 text-xs font-bold text-white backdrop-blur-sm">
+			{getTypeLabel(anime.season_type)}
 		</div>
 
 		<!-- 来源标签 -->
-		<div class="absolute bottom-2 left-2 rounded-md {anime.source === 'bilibili' ? 'bg-pink-500/80' : 'bg-emerald-500/80'} px-2 py-0.5 text-[10px] font-medium text-white backdrop-blur-sm">
-			{anime.source === 'bilibili' ? 'Bilibili' : 'TMDB'}
+		<div class="absolute bottom-2 left-2 rounded-md bg-pink-500/80 px-2 py-0.5 text-[10px] font-medium text-white backdrop-blur-sm">
+			Bilibili
 		</div>
 
 		<!-- 悬停遮罩 -->
-		<div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+		<div class="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
 			<div class="p-3">
-				<p class="mb-2 line-clamp-3 text-xs text-white/90 leading-relaxed">{anime.overview || "暂无简介"}</p>
+				<p class="mb-2 line-clamp-3 text-xs text-white/90 leading-relaxed">{anime.overview || i18n(I18nKey.animeNoOverview)}</p>
 				<button class="w-full rounded-lg bg-(--primary) px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-(--primary)/80">
-					查看详情
+					{i18n(I18nKey.animeViewDetails)}
 				</button>
 			</div>
 		</div>
@@ -98,13 +130,13 @@ function getTypeColor(type: string): string {
 <style>
 	.line-clamp-1 {
 		display: -webkit-box;
-		-webkit-line-clamp: 1;
+		line-clamp: 1;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
 	}
 	.line-clamp-3 {
 		display: -webkit-box;
-		-webkit-line-clamp: 3;
+		line-clamp: 3;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
 	}

@@ -12,14 +12,16 @@ comment: true
 
 # MySQL学习笔记
 
+> <span style="color:#60a5fa;font-weight:700;">🔵 核心概念</span>　<span style="color:#34d399;font-weight:700;">🟢 推荐实践</span>　<span style="background-color:rgba(251,191,36,.20);color:#f59e0b;font-weight:700;padding:2px 6px;border-radius:4px;">🟡 高频考点</span>　<span style="color:#f87171;font-weight:700;text-decoration:underline wavy #f87171;text-underline-offset:3px;">🔴 风险 / 易错点</span>
+
 # 基础篇
 
 ## 通用语法及分类
 
-- DDL: 数据定义语言，用来定义数据库对象（数据库、表、字段）
-- DML: 数据操作语言，用来对数据库表中的数据进行增删改
-- DQL: 数据查询语言，用来查询数据库中表的记录
-- DCL: 数据控制语言，用来创建数据库用户、控制数据库的控制权限
+- <span style="color:#60a5fa;font-weight:700;">DDL</span>: 数据定义语言，用来定义数据库对象（数据库、表、字段）
+- <span style="color:#34d399;font-weight:700;">DML</span>: 数据操作语言，用来对数据库表中的数据进行增删改
+- <span style="color:#a78bfa;font-weight:700;">DQL</span>: 数据查询语言，用来查询数据库中表的记录
+- <span style="color:#f59e0b;font-weight:700;">DCL</span>: 数据控制语言，用来创建数据库用户、控制数据库的控制权限
 
 ### DDL（数据定义语言）
 
@@ -40,7 +42,7 @@ comment: true
 
 ##### 注意事项
 
-- UTF8字符集长度为3字节，有些符号占4字节，所以推荐用utf8mb4字符集
+- UTF8字符集长度为3字节，有些符号占4字节，所以<span style="color:#34d399;font-weight:700;background-color:rgba(52,211,153,.12);padding:1px 4px;border-radius:4px;">推荐使用 utf8mb4 字符集</span>
 
 #### 表操作
 
@@ -63,7 +65,7 @@ CREATE TABLE 表名(
 )[ COMMENT 表注释 ];
 ```
 
-**最后一个字段后面没有逗号**
+<span style="color:#f87171;font-weight:700;text-decoration:underline wavy #f87171;text-underline-offset:3px;">易错：最后一个字段后面不能有逗号。</span>
 
 添加字段：
 `ALTER TABLE 表名 ADD 字段名 类型(长度) [COMMENT 注释] [约束];`
@@ -84,7 +86,7 @@ CREATE TABLE 表名(
 
 删除表：
 `DROP TABLE [IF EXISTS] 表名;`
-删除表，并重新创建该表：
+<span style="color:#f87171;font-weight:700;">危险操作：TRUNCATE 会清空整张表并重置结构相关状态，执行前务必确认。</span>
 `TRUNCATE TABLE 表名;`
 
 ### DML（数据操作语言）
@@ -102,7 +104,7 @@ CREATE TABLE 表名(
 
 ##### 注意事项
 
-- 字符串和日期类型数据应该包含在引号中
+- <span style="color:#f59e0b;font-weight:700;">字符串和日期类型数据必须包含在引号中</span>
 - 插入的数据大小应该在字段的规定范围内
 
 #### 更新和删除数据
@@ -114,6 +116,8 @@ CREATE TABLE 表名(
 
 删除数据：
 `DELETE FROM 表名 [ WHERE 条件 ];`
+
+<span style="color:#f87171;font-weight:700;text-decoration:underline wavy #f87171;text-underline-offset:3px;">UPDATE 或 DELETE 省略 WHERE 会影响整张表，执行前必须先确认条件范围。</span>
 
 ### DQL（数据查询语言）
 
@@ -233,7 +237,7 @@ select * from employee where idcard like '%X';
 语法：
 `SELECT 字段列表 FROM 表名 [ WHERE 条件 ] GROUP BY 分组字段名 [ HAVING 分组后的过滤条件 ];`
 
-where 和 having 的区别：
+<span style="background-color:rgba(251,191,36,.18);color:#f59e0b;font-weight:700;padding:2px 6px;border-radius:4px;">高频考点：WHERE 和 HAVING 的区别</span>
 
 - 执行时机不同：where是分组之前进行过滤，不满足where条件不参与分组；having是分组后对结果进行过滤。
 - 判断条件不同：where不能对聚合函数进行判断，而having可以。
@@ -255,7 +259,7 @@ select workaddress, count(*) address_count from employee where age < 45 group by
 
 ##### 注意事项
 
-- 执行顺序：where > 聚合函数 > having
+- <span style="color:#60a5fa;font-weight:700;">执行顺序：WHERE → 聚合函数 → HAVING</span>
 - 分组之后，查询的字段一般为聚合函数和分组字段，查询其他字段无任何意义
 
 #### 排序查询
@@ -304,7 +308,7 @@ SELECT * FROM employee LIMIT 10, 10;
 
 #### DQL执行顺序
 
-FROM -> WHERE -> GROUP BY -> SELECT -> ORDER BY -> LIMIT
+<span style="background-color:rgba(96,165,250,.14);color:#60a5fa;font-weight:700;padding:3px 8px;border-radius:4px;">FROM → WHERE → GROUP BY → SELECT → ORDER BY → LIMIT</span>
 
 ### DCL
 
@@ -343,7 +347,7 @@ drop user 'test'@'localhost';
 
 ##### 注意事项
 
-- 主机名可以使用 % 通配
+- 主机名可以使用 `%` 通配；<span style="color:#f87171;font-weight:700;">生产环境避免无范围开放，优先限制具体主机。</span>
 
 #### 权限控制
 
@@ -374,7 +378,7 @@ drop user 'test'@'localhost';
 ##### 注意事项
 
 - 多个权限用逗号分隔
-- 授权时，数据库名和表名可以用 \* 进行通配，代表所有
+- 授权时，数据库名和表名可以用 \* 进行通配，代表所有；<span style="color:#34d399;font-weight:700;">遵循最小权限原则，只授予业务必需权限。</span>
 
 ## 函数
 
@@ -766,7 +770,7 @@ select e.*, d.* from (select * from employee where entrydate > '2006-01-01') as 
 
 ## 事务
 
-事务是一组操作的集合，事务会把所有操作作为一个整体一起向系统提交或撤销操作请求，即这些操作要么同时成功，要么同时失败。
+<span style="color:#60a5fa;font-weight:700;">事务是一组不可分割的操作集合：要么全部成功，要么全部失败。</span>
 
 基本操作：
 
@@ -819,10 +823,10 @@ commit;
 
 ### 四大特性ACID
 
-- 原子性(Atomicity)：事务是不可分割的最小操作但愿，要么全部成功，要么全部失败
-- 一致性(Consistency)：事务完成时，必须使所有数据都保持一致状态
-- 隔离性(Isolation)：数据库系统提供的隔离机制，保证事务在不受外部并发操作影响的独立环境下运行
-- 持久性(Durability)：事务一旦提交或回滚，它对数据库中的数据的改变就是永久的
+- <span style="color:#60a5fa;font-weight:700;">原子性（Atomicity）</span>：事务是不可分割的最小操作单元，要么全部成功，要么全部失败
+- <span style="color:#34d399;font-weight:700;">一致性（Consistency）</span>：事务完成时，必须使所有数据都保持一致状态
+- <span style="color:#a78bfa;font-weight:700;">隔离性（Isolation）</span>：数据库系统提供隔离机制，保证事务在不受外部并发操作影响的独立环境下运行
+- <span style="color:#f59e0b;font-weight:700;">持久性（Durability）</span>：事务一旦提交，它对数据库中数据的改变就是永久的
 
 ### 并发事务
 
@@ -844,13 +848,13 @@ commit;
 | Serializable          | ×    | ×          | ×    |
 
 - √表示在当前隔离级别下该问题会出现
-- Serializable 性能最低；Read uncommitted 性能最高，数据安全性最差
+- <span style="color:#f87171;font-weight:700;">Serializable 隔离性最高但性能最低；Read Uncommitted 性能最高但数据安全性最差。</span>
 
 查看事务隔离级别：
 `SELECT @@TRANSACTION_ISOLATION;`
 设置事务隔离级别：
 `SET [ SESSION | GLOBAL ] TRANSACTION ISOLATION LEVEL {READ UNCOMMITTED | READ COMMITTED | REPEATABLE READ | SERIALIZABLE };`
-SESSION 是会话级别，表示只针对当前会话有效，GLOBAL 表示对所有会话有效
+<span style="text-decoration:underline wavy #f59e0b;text-underline-offset:3px;">SESSION 只对当前会话有效；GLOBAL 会影响后续建立的所有会话，修改时需谨慎。</span>
 
 # 进阶篇
 
@@ -858,8 +862,8 @@ SESSION 是会话级别，表示只针对当前会话有效，GLOBAL 表示对�
 
 MySQL体系结构：
 
-存储引擎就是存储数据、建立索引、更新/查询数据等技术的实现方式。存储引擎是基于表而不是基于库的，所以存储引擎也可以被称为表引擎。
-默认存储引擎是InnoDB。
+存储引擎就是存储数据、建立索引、更新/查询数据等技术的实现方式。<span style="color:#60a5fa;font-weight:700;">存储引擎作用于表，而不是数据库。</span>
+<span style="background-color:rgba(52,211,153,.14);color:#34d399;font-weight:700;padding:2px 6px;border-radius:4px;">MySQL 默认存储引擎是 InnoDB。</span>
 
 相关操作：
 
@@ -999,16 +1003,16 @@ EXPLAIN 各字段含义：
 
 - id：select 查询的序列号，表示查询中执行 select 子句或者操作表的顺序（id相同，执行顺序从上到下；id不同，值越大越先执行）
 - select_type：表示 SELECT 的类型，常见取值有 SIMPLE（简单表，即不适用表连接或者子查询）、PRIMARY（主查询，即外层的查询）、UNION（UNION中的第二个或者后面的查询语句）、SUBQUERY（SELECT/WHERE之后包含了子查询）等
-- type：表示连接类型，性能由好到差的连接类型为 NULL、system、const、eq_ref、ref、range、index、all
+- type：表示连接类型，<span style="background-color:rgba(251,191,36,.18);color:#f59e0b;font-weight:700;padding:1px 5px;border-radius:4px;">性能由好到差：NULL → system → const → eq_ref → ref → range → index → ALL</span>
 - possible_key：可能应用在这张表上的索引，一个或多个
-- Key：实际使用的索引，如果为 NULL，则没有使用索引
+- key：实际使用的索引；<span style="color:#f87171;font-weight:700;">如果为 NULL，说明没有使用索引。</span>
 - Key_len：表示索引中使用的字节数，该值为索引字段最大可能长度，并非实际使用长度，在不损失精确性的前提下，长度越短越好
 - rows：MySQL认为必须要执行的行数，在InnoDB引擎的表中，是一个估计值，可能并不总是准确的
 - filtered：表示返回结果的行数占需读取行数的百分比，filtered的值越大越好
 
 ## 索引
 
-索引是帮助 MySQL **高效获取数据**的**数据结构（有序）**。在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查询算法，这种数据结构就是索引。
+<span style="color:#60a5fa;font-weight:700;">索引是帮助 MySQL 高效获取数据的有序数据结构。</span>在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据，从而实现高效查询。
 
 优缺点：
 
@@ -1020,7 +1024,7 @@ EXPLAIN 各字段含义：
 缺点：
 
 - 索引列也是要占用空间的
-- 索引大大提高了查询效率，但降低了更新的速度，比如 INSERT、UPDATE、DELETE
+- <span style="color:#f87171;font-weight:700;">索引会提高查询效率，但会降低 INSERT、UPDATE、DELETE 的速度，并占用额外空间。</span>
 
 ### 索引结构
 
@@ -1058,8 +1062,8 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 
 与 B-Tree 的区别：
 
-- 所有的数据都会出现在叶子节点
-- 叶子节点形成一个单向链表
+- <span style="color:#60a5fa;font-weight:700;">所有行数据都出现在叶子节点</span>
+- <span style="color:#34d399;font-weight:700;">叶子节点按顺序形成链表，适合范围查询</span>
 
 MySQL 索引数据结构对经典的 B+Tree 进行了优化。在原 B+Tree 的基础上，增加一个指向相邻叶子节点的链表指针，就形成了带有顺序指针的 B+Tree，提高区间访问的性能。
 
@@ -1070,7 +1074,7 @@ MySQL 索引数据结构对经典的 B+Tree 进行了优化。在原 B+Tree 的�
 
 特点：
 
-- Hash索引只能用于对等比较（=、in），不支持范围查询（betwwn、>、<、...）
+- <span style="color:#f87171;font-weight:700;">Hash 索引只适用于等值比较（=、IN），不支持范围查询（BETWEEN、&gt;、&lt; 等）。</span>
 - 无法利用索引完成排序操作
 - 查询效率高，通常只需要一次检索就可以了，效率通常要高于 B+Tree 索引
 
@@ -1108,7 +1112,7 @@ MySQL 索引数据结构对经典的 B+Tree 进行了优化。在原 B+Tree 的�
 ![](images/img-mysql/原理图.png "大致原理")
 ![](images/img-mysql/演示图.png "演示图")
 
-聚集索引选取规则：
+<span style="background-color:rgba(251,191,36,.18);color:#f59e0b;font-weight:700;padding:2px 6px;border-radius:4px;">高频考点：聚集索引选取规则</span>
 
 - 如果存在主键，主键索引就是聚集索引
 - 如果不存在主键，将使用第一个唯一(UNIQUE)索引作为聚集索引
@@ -1170,16 +1174,16 @@ drop index idx_user_email on tb_user;
 
 #### 最左前缀法则
 
-如果索引关联了多列（联合索引），要遵守最左前缀法则，最左前缀法则指的是查询从索引的最左列开始，并且不跳过索引中的列。
-如果跳跃某一列，索引将部分失效（后面的字段索引失效）。
+如果索引关联了多列（联合索引），必须遵守<span style="color:#60a5fa;font-weight:700;">最左前缀法则</span>：查询从索引最左列开始，并且不能跳过中间列。
+<span style="color:#f87171;font-weight:700;text-decoration:underline wavy #f87171;text-underline-offset:3px;">跳过某一列后，该列右侧的索引字段会失效。</span>
 
-联合索引中，出现范围查询（<, >），范围查询右侧的列索引失效。可以用>=或者<=来规避索引失效问题。
+联合索引中，出现范围查询（`<`、`>`）时，<span style="color:#f87171;font-weight:700;">范围条件右侧的列索引会失效</span>；可优先尝试 `>=` 或 `<=`，并通过 EXPLAIN 验证执行计划。
 
 #### 索引失效情况
 
-1. 在索引列上进行运算操作，索引将失效。如：`explain select * from tb_user where substring(phone, 10, 2) = '15';`
-2. 字符串类型字段使用时，不加引号，索引将失效。如：`explain select * from tb_user where phone = 17799990015;`，此处phone的值没有加引号
-3. 模糊查询中，如果仅仅是尾部模糊匹配，索引不会是失效；如果是头部模糊匹配，索引失效。如：`explain select * from tb_user where profession like '%工程';`，前后都有 % 也会失效。
+1. <span style="color:#f87171;font-weight:700;">在索引列上进行函数或运算操作</span>，索引可能失效。如：`explain select * from tb_user where substring(phone, 10, 2) = '15';`
+2. <span style="color:#f87171;font-weight:700;">字符串字段比较时不加引号，发生隐式类型转换</span>，索引可能失效。如：`explain select * from tb_user where phone = 17799990015;`
+3. 模糊查询中，尾部模糊匹配通常可使用索引；<span style="color:#f87171;font-weight:700;">以 `%` 开头的模糊匹配通常无法使用普通 B+Tree 索引。</span>如：`explain select * from tb_user where profession like '%工程';`
 4. 用 or 分割开的条件，如果 or 其中一个条件的列没有索引，那么涉及的索引都不会被用到。
 5. 如果 MySQL 评估使用索引比全表更慢，则不使用索引。
 
@@ -1198,7 +1202,7 @@ use 是建议，实际使用哪个索引 MySQL 还会自己权衡运行速度去
 
 #### 覆盖索引&回表查询
 
-尽量使用覆盖索引（查询使用了索引，并且需要返回的列，在该索引中已经全部能找到），减少 select \*。
+<span style="color:#34d399;font-weight:700;background-color:rgba(52,211,153,.12);padding:1px 5px;border-radius:4px;">优先使用覆盖索引，减少 SELECT * 和回表查询。</span>
 
 explain 中 extra 字段含义：
 `using index condition`：查找使用了索引，但是需要回表查询数据
@@ -1206,7 +1210,7 @@ explain 中 extra 字段含义：
 
 如果在聚集索引中直接能找到对应的行，则直接返回行数据，只需要一次查询，哪怕是select \*；如果在辅助索引中找聚集索引，如`select id, name from xxx where name='xxx';`，也只需要通过辅助索引(name)查找到对应的id，返回name和name索引对应的id即可，只需要一次查询；如果是通过辅助索引查找其他字段，则需要回表查询，如`select id, name, gender from xxx where name='xxx';`
 
-所以尽量不要用`select *`，容易出现回表查询，降低效率，除非有联合索引包含了所有字段
+所以<span style="color:#f87171;font-weight:700;text-decoration:underline wavy #f87171;text-underline-offset:3px;">尽量不要使用 `SELECT *`</span>，否则容易产生回表查询并增加网络传输；只查询业务所需字段。
 
 面试题：一张表，有四个字段（id, username, password, status），由于数据量大，需要对以下SQL语句进行优化，该如何进行才是最优方案：
 `select id, username, password from tb_user where username='itcast';`
@@ -1250,7 +1254,7 @@ show index 里面的sub_part可以看到接取的长度
 3. 尽量选择区分度高的列作为索引，尽量建立唯一索引，区分度越高，使用索引的效率越高
 4. 如果是字符串类型的字段，字段长度较长，可以针对于字段的特点，建立前缀索引
 5. 尽量使用联合索引，减少单列索引，查询时，联合索引很多时候可以覆盖索引，节省存储空间，避免回表，提高查询效率
-6. 要控制索引的数量，索引并不是多多益善，索引越多，维护索引结构的代价就越大，会影响增删改的效率
+6. <span style="color:#f87171;font-weight:700;">索引不是越多越好</span>，索引越多，维护索引结构的成本越高，也越影响增删改效率
 7. 如果索引列不能存储NULL值，请在创建表时使用NOT NULL约束它。当优化器知道每列是否包含NULL值时，它可以更好地确定哪个索引最有效地用于查询
 
 ## SQL 优化
@@ -1264,7 +1268,7 @@ show index 里面的sub_part可以看到接取的长度
 3. 主键顺序插入
 
 大批量插入：
-如果一次性需要插入大批量数据，使用insert语句插入性能较低，此时可以使用MySQL数据库提供的load指令插入。
+如果一次性需要插入大批量数据，逐条 INSERT 性能较低，<span style="color:#34d399;font-weight:700;">优先使用批量 INSERT 或 LOAD DATA 导入。</span>
 
 ```mysql
 # 客户端连接服务端时，加上参数 --local-infile（这一行在bash/cmd界面输入）
@@ -1291,8 +1295,8 @@ MERGE_THRESHOLD：合并页的阈值，可以自己设置，在创建表或创�
 主键设计原则：
 
 - 满足业务需求的情况下，尽量降低主键的长度
-- 插入数据时，尽量选择顺序插入，选择使用 AUTO_INCREMENT 自增主键
-- 尽量不要使用 UUID 做主键或者是其他的自然主键，如身份证号
+- 插入数据时，<span style="color:#34d399;font-weight:700;">尽量顺序插入并使用 AUTO_INCREMENT 自增主键</span>
+- <span style="color:#f87171;font-weight:700;">尽量不要使用无序 UUID 或过长的自然值作为聚集索引主键</span>，否则容易导致页分裂并增大二级索引
 - 业务操作时，避免对主键的修改
 
 ### order by优化
@@ -1300,7 +1304,7 @@ MERGE_THRESHOLD：合并页的阈值，可以自己设置，在创建表或创�
 1. Using filesort：通过表的索引或全表扫描，读取满足条件的数据行，然后在排序缓冲区 sort buffer 中完成排序操作，所有不是通过索引直接返回排序结果的排序都叫 FileSort 排序
 2. Using index：通过有序索引顺序扫描直接返回有序数据，这种情况即为 using index，不需要额外排序，操作效率高
 
-如果order by字段全部使用升序排序或者降序排序，则都会走索引，但是如果一个字段升序排序，另一个字段降序排序，则不会走索引，explain的extra信息显示的是`Using index, Using filesort`，如果要优化掉Using filesort，则需要另外再创建一个索引，如：`create index idx_user_age_phone_ad on tb_user(age asc, phone desc);`，此时使用`select id, age, phone from tb_user order by age asc, phone desc;`会全部走索引
+如果 ORDER BY 字段全部使用相同排序方向，通常可以利用匹配的索引；如果升降序混合，索引方向也要与查询一致。<span style="color:#f59e0b;font-weight:700;">EXPLAIN 的 Extra 出现 `Using filesort`，表示需要额外排序。</span>可建立方向匹配的索引，例如：`create index idx_user_age_phone_ad on tb_user(age asc, phone desc);`
 
 总结：
 
@@ -1318,7 +1322,7 @@ MERGE_THRESHOLD：合并页的阈值，可以自己设置，在创建表或创�
 
 ### limit优化
 
-常见的问题如`limit 2000000, 10`，此时需要 MySQL 排序前2000000条记录，但仅仅返回2000000 - 2000010的记录，其他记录丢弃，查询排序的代价非常大。
+<span style="color:#f87171;font-weight:700;text-decoration:underline wavy #f87171;text-underline-offset:3px;">深分页陷阱：</span>`limit 2000000, 10` 仍需扫描并丢弃前 2000000 条记录，偏移量越大，代价越高。
 优化方案：一般分页查询时，通过创建覆盖索引能够比较好地提高性能，可以通过覆盖索引加子查询形式进行优化
 
 例如：
@@ -1354,11 +1358,11 @@ count的几种用法：
 - count(1)：InnoDB 引擎遍历整张表，但不取值。服务层对于返回的每一层，放一个数字 1 进去，直接按行进行累加
 - count(\*)：InnoDB 引擎并不会把全部字段取出来，而是专门做了优化，不取值，服务层直接按行进行累加
 
-按效率排序：count(字段) < count(主键) < count(1) < count(\*)，所以尽量使用 count(\*)
+<span style="background-color:rgba(52,211,153,.14);color:#34d399;font-weight:700;padding:2px 6px;border-radius:4px;">统计总行数时优先写 `COUNT(*)`，语义最清晰且 MySQL 会专门优化。</span>
 
 ### update优化（避免行锁升级为表锁）
 
-InnoDB 的行锁是针对索引加的锁，不是针对记录加的锁，并且该索引不能失效，否则会从行锁升级为表锁。
+<span style="color:#f87171;font-weight:700;">InnoDB 的行锁锁在索引记录上；若更新条件没有命中索引，可能扫描并锁住大量记录，效果接近“锁表”。</span>
 
 如以下两条语句：
 `update student set no = '123' where id = 1;`，这句由于id有主键索引，所以只会锁这一行；
@@ -1377,20 +1381,20 @@ InnoDB 的行锁是针对索引加的锁，不是针对记录加的锁，并且�
 #### 语法
 
 创建视图：  
-`CREATE [OR REPLACE] VIEW 视图名称(列名列表)】AS SELECT语句[WITH[CASCADED|LOCAL] CHECK OPTION]`
+`CREATE [OR REPLACE] VIEW 视图名称(列名列表) AS SELECT语句 [WITH [CASCADED | LOCAL] CHECK OPTION];`
 
 查询视图：  
-查看创建视图语句：`SHOW CRETE VIEW 视图名称;`  
-<font style="color:#262626;">查看视图数据：</font>`查看视图数据:SELECT*FROM 视图名称…;`
+查看创建视图语句：`SHOW CREATE VIEW 视图名称;`
 
-<font style="color:#262626;">修改视图：  
-</font><font style="color:#262626;">方式一：  
-</font>`CREATE [OR REPLACE]VIEW 视图名称(列名列表)AS SELECT语句[WITH[CASCADEDLLOCAL] CHECK OPTION`<font style="color:#262626;">  
-</font><font style="color:#262626;">方式二：  
-</font>`ALTER VEW 视图名称(列名列表)AS SELECT语句[WITH[CASCADED|LOCAL]CHECK OPTION]`
+查看视图数据：`SELECT * FROM 视图名称;`
 
-<font style="color:#262626;">删除视图：  
-</font>`DROP VIEW [IF EXISTS]视图名称[,视图名称]`
+修改视图：
+
+方式一：`CREATE OR REPLACE VIEW 视图名称(列名列表) AS SELECT语句 [WITH [CASCADED | LOCAL] CHECK OPTION];`
+
+方式二：`ALTER VIEW 视图名称(列名列表) AS SELECT语句 [WITH [CASCADED | LOCAL] CHECK OPTION];`
+
+删除视图：`DROP VIEW [IF EXISTS] 视图名称 [, 视图名称];`
 
 ```sql
 -- 创建视图
@@ -1478,16 +1482,17 @@ select * from tb_stu_course_view;
 
 `查看视图数据:SELECT*FROM 视图名称…;`
 
-**<font style="color:#262626;">查看：</font>**
+**查看：**
 
-`SELECT* FROM INFORMATION SCHEMA.ROUTINES WHERE ROUTINE_SCHEMA='xx';--查询数据库的存储过程及状态信息`<font style="color:#262626;">  
-</font>`SHOW CREATE PROCEDURE 存储过程名称;--查询某个存储过程的定义`
+`SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_SCHEMA = 'xx'; -- 查询数据库的存储过程及状态信息`
 
-**<font style="color:#262626;">删除：</font>**
+`SHOW CREATE PROCEDURE 存储过程名称; -- 查询某个存储过程的定义`
+
+**删除：**
 
 `DROP PROCEDURE [IF EXISTS]存储过程名称;`
 
-<font style="color:#262626;">案例：</font>
+**案例：**
 
 ```sql
 -- 存储过程基本语法
@@ -1516,9 +1521,11 @@ drop procedure if exists p1;
 
 查看系统变量
 
-`SHOW [SESSION |GLOBAL] VARIABLES ;    --查看所有系统变量`<font style="color:#262626;">  
-</font>`SHOW[SESSION|GLOBAL] VARIABLES LIKE'; --可以通过LKE模糊匹配方式查找变量`<font style="color:#262626;">  
-</font>`SELECT @@[SESSION|GLOBAL]系统变量名;    -- 查看指定变量的值`
+`SHOW [SESSION | GLOBAL] VARIABLES; -- 查看所有系统变量`
+
+`SHOW [SESSION | GLOBAL] VARIABLES LIKE '匹配模式'; -- 通过 LIKE 模糊匹配变量`
+
+`SELECT @@[SESSION | GLOBAL].系统变量名; -- 查看指定变量的值`
 
 ```sql
 -- 变量：系统变量
@@ -1545,17 +1552,18 @@ set global auto commit = 0;
 
 **赋值：**
 
-`SET @var name = expr [, @var_name = expr]...;`<font style="color:#262626;">  
-</font>`SET @var name := expr [, @var_name := expr]...;`
+`SET @var_name = expr [, @var_name = expr]...;`
+
+`SET @var_name := expr [, @var_name := expr]...;`
 
 `SELECT @var name := expr , @var name := expr ...;`
 `SELECT 字段名 INTO @var_name FROM 表名;`
 
-<font style="color:#262626;"> </font>**<font style="color:#262626;">使用：</font>**
+**使用：**
 
 `SELECT @var_name;`
 
-<font style="color:#262626;">案例：</font>
+**案例：**
 
 ```sql
 -- 变量：用户变量
@@ -1584,9 +1592,9 @@ select @abc; -- 输出为NULL
 
 `DECLARE 变量名 变量类型 [DEFAULT..];`
 
-<font style="color:#262626;">变量类型就是数据库字段类型:INT、BIGINT、CHAR、VARCHAR、DATE、TIME等。</font>
+变量类型就是数据库字段类型：INT、BIGINT、CHAR、VARCHAR、DATE、TIME 等。
 
-**<font style="color:#262626;">赋值：</font>**
+**赋值：**
 
 `SET 变量名=值;`
 
@@ -1594,7 +1602,7 @@ select @abc; -- 输出为NULL
 
 `SELECT 字段名 INTO 变量名 FROM 表名 ...;`
 
-<font style="color:#262626;">案例：</font>
+**案例：**
 
 ```sql
 -- 变量：局部变量
@@ -2115,7 +2123,7 @@ MySQL中的锁，按照锁的粒度分，分为一下三类：
 
 介绍：
 
-全局锁就是对整个数据库实例加锁，加锁后整个实例就处于只读状态，后续的DML的写语句，DDL语句，已经更新操作的事务提交语句都将被阻塞。
+全局锁会让整个数据库实例进入只读状态，后续 DML 写入、DDL 以及相关事务提交都会被阻塞。<span style="color:#f87171;font-weight:700;">它是高影响操作，应避开业务高峰。</span>
 
 其典型的使用场景是做全库的逻辑备份，对所有的表进行锁定，从而获取一致性视图，保证数据的完整性。
 
@@ -2139,7 +2147,7 @@ MySQL中的锁，按照锁的粒度分，分为一下三类：
 
 解决方法：
 
-在InnoDB引擎中，我们可以在备份时加上参数 --single-transaction 参数来完成不加锁的一致性数据备份。
+在 InnoDB 引擎中，<span style="color:#34d399;font-weight:700;">备份时优先使用 `--single-transaction` 获取一致性快照，减少全局锁对业务的影响。</span>
 
 `mysqldump --single-transaction -uroot -p123456 itcast > itcast.sql`（只适用于支持「可重复读隔离级别的事务」的存储引擎）
 
@@ -2162,7 +2170,7 @@ MySQL中的锁，按照锁的粒度分，分为一下三类：
 1. 表共享读锁（read lock）
 2. 表独占写锁（write lock）
 
-**读锁不会阻塞其他客户端的读，但是会阻塞写。写锁既会阻塞其他客户端的读，又会阻塞其他客户端的写。**
+<span style="background-color:rgba(251,191,36,.18);color:#f59e0b;font-weight:700;padding:2px 6px;border-radius:4px;">读锁不阻塞其他读，但会阻塞写；写锁会阻塞其他读和写。</span>
 
 语法：
 
@@ -2210,7 +2218,7 @@ MDL加锁过程是系统自动控制，无需显式使用，在访问一张表�
 
 那么有了「意向锁」，由于在对记录加独占锁前，先会加上表级别的意向独占锁，那么在加「独占表锁」时，直接查该表是否有意向独占锁，如果有就意味着表里已经有记录被加了独占锁，这样就不用去遍历表里的记录。
 
-**意向锁的目的是为了快速判断表里是否有记录被加锁**。
+<span style="color:#60a5fa;font-weight:700;">意向锁的核心目的：让 MySQL 快速判断表内是否已有记录被加锁，避免逐行检查。</span>
 
 加锁方式：
 
@@ -2257,10 +2265,10 @@ InnoDB实现了以下两种类型的行锁：
 | select ... lock in share mode |   共享锁   | 需要手动select之后加上lock in share mode |
 |     select ... for update     |   排他锁   |      需要手动在select之后for update      |
 
-默认情况下，InnoDB在 REPEATABLE READ事务隔离级别运行，InnoDB使用 next-key锁进行搜索和索引扫描，以防止幻读。
+默认情况下，InnoDB 在 REPEATABLE READ 隔离级别运行，<span style="color:#60a5fa;font-weight:700;">使用 Next-Key Lock（记录锁 + 间隙锁）防止幻读。</span>
 
 1. 针对唯一索引进行检索时，对已存在的记录进行等值匹配时，将会自动优化为行锁。
-2. InnoDB的行锁是针对于索引加的锁，不通过索引条件检索数据，那么!nnoDB将对表中的所有记录加锁，此时 **就会升级为表锁**。
+2. InnoDB 的行锁针对索引记录加锁；<span style="color:#f87171;font-weight:700;text-decoration:underline wavy #f87171;text-underline-offset:3px;">不通过索引条件检索时，可能锁住扫描到的全部记录，严重降低并发能力。</span>
 
 查看意向锁及行锁的加锁情况：
 
@@ -2331,7 +2339,7 @@ InnoDB实现了以下两种类型的行锁：
 
 #### redo log
 
-重做日志，记录的是事务提交时数据页的物理修改，是用来实现事务的**持久性**。
+<span style="color:#60a5fa;font-weight:700;">Redo Log 记录数据页的物理修改，核心作用是保证事务的持久性和崩溃恢复。</span>
 
 该日志文件由两部分组成:重做日志缓冲(redo log buffer)以及重做日志文件(redo log file),前者是在内存中，后者在磁盘中。当事务提交之后会把所有修改信息都存到该日志文件中,用于在刷新脏页到磁盘,发生错误时,进行数据恢复使用。
 
@@ -2341,11 +2349,11 @@ Buffer Pool在产生脏页数据的时候，会先将数据存储到 redo log bu
 
 redo log 要写到磁盘，数据也要写磁盘，为什么要多此一举?
 
-写入 redo log 的方式使用了追加操作，所以磁盘操作是**顺序写**，而写入数据需要先找到写入位置，然后才写到磁盘，所以磁盘操作是**随机写**。
+写入 redo log 使用追加操作，因此是<span style="color:#34d399;font-weight:700;">顺序写</span>；直接刷新数据页需要定位写入位置，属于<span style="color:#f59e0b;font-weight:700;">随机写</span>。顺序写通常具有更好的磁盘性能。
 
 #### undo log
 
-回滚日志，用于记录数据被修改前的信息，作用包含两个:提供回滚 和 MVCC(多版本并发控制)。
+<span style="color:#a78bfa;font-weight:700;">Undo Log 记录数据修改前的信息，承担事务回滚和 MVCC 版本链两项职责。</span>
 
 undo log 和 redo log 记录物理日志不一样，它是逻辑日志。可以认为当 delete 一条记录时，undo log中会记录一条对应的insert记录，反之亦然，当 update 一条记录时，它记录一条对应相反的 update 记录。当执行 rollback 时，就可以从 undo log 中的逻辑记录读取到相应的内容并进行回滚。
 
@@ -2355,11 +2363,11 @@ Undo log 存储：undo log 采用段的方式进行管理和记录，存放在�
 
 ### MVCC
 
-**当前读：**
+<span style="background-color:rgba(251,191,36,.18);color:#f59e0b;font-weight:700;padding:2px 6px;border-radius:4px;">当前读</span>
 
 读取的是记录的最新版本，读取时还要保证其他并发事务不能修改当前记录，会对读取的记录进行加锁。对于我们日常的操作，如:select...lock in share mode(共享锁)，select... for update、update、insert、delete(排他锁)都是一种当前读。
 
-**快照读：**
+<span style="background-color:rgba(96,165,250,.14);color:#60a5fa;font-weight:700;padding:2px 6px;border-radius:4px;">快照读</span>
 
 简单的select(不加锁)就是快照读，快照读，读取的是记录数据的可见版本，有可能是历史数据，不加锁，是非阻塞读。
 
@@ -2367,9 +2375,9 @@ Undo log 存储：undo log 采用段的方式进行管理和记录，存放在�
 - Repeatable Read:开启事务后第一个select语句才是快照读的地方。
 - Serializable:快照读会退化为当前读。
 
-**MVCC：**
+<span style="background-color:rgba(167,139,250,.16);color:#a78bfa;font-weight:700;padding:2px 6px;border-radius:4px;">MVCC</span>
 
-全称 Multi-Version Concurrency Control，多版本并发控制。指维护一个数据的多个版本，使得读写操作没有冲突，快照读为MVSOL实现MVCC提供了一个非阻塞读功能。MVCC的具体实现，还需要依赖于数据库记录中的三个隐式字段、undo log日志、read View。
+全称 Multi-Version Concurrency Control，多版本并发控制。它通过维护数据的多个版本减少读写冲突，为快照读提供非阻塞读取能力。<span style="color:#60a5fa;font-weight:700;">其实现依赖隐藏字段、Undo Log 版本链和 ReadView。</span>
 
 #### 三个隐藏字段
 
@@ -2467,12 +2475,12 @@ Mysql数据库安装完成后，自带了一下四个数据库，具体作用如
 
 #### 介绍
 
-二进制日志(BINLOG)记录了所有的 DDL(数据定义语言)语句和 DML(数据操纵语言)语句，但不包括数据查询(SELECT、SHOW)语句。
+<span style="color:#60a5fa;font-weight:700;">Binlog 记录数据变更相关的 DDL 和 DML，但不记录普通 SELECT、SHOW 查询。</span>
 
 作用：
 
-1. 灾难时的数据恢复；
-2. MySQL的主从复制。
+1. <span style="color:#34d399;font-weight:700;">数据恢复</span>；
+2. <span style="color:#a78bfa;font-weight:700;">主从复制</span>。
 
 在MVSOL8版本中，默认二进制日志是开启着的，涉及到的参数如下：
 
@@ -2506,7 +2514,7 @@ mysqlbinlog[参数选项]logfilename
 
 #### 日志删除
 
-对于比较繁忙的业务系统，每天生成的binlog数据巨大，如果长时间不清除，将会占用大量磁盘空间。可以通过以下几种方式清理日志：
+对于繁忙的业务系统，Binlog 会持续占用磁盘空间。<span style="color:#f87171;font-weight:700;">应配置合理的过期策略；手工清理前必须确认备份与复制位点，避免破坏恢复链或主从复制。</span>
 
 | 指令                                             | 含义                                                                 |
 | ------------------------------------------------ | -------------------------------------------------------------------- |
@@ -2533,7 +2541,7 @@ general_log_file=mysql_query.log
 
 ### 慢查询日志
 
-慢查询日志记录了所有执行时间超过参数 long_query_time 设置值并且扫描记录数不小于 min_examined_row_limit的所有的SQL语句的日志，默认未开启。long_query_time 默认为 10 秒，最小为0，精度可以到微秒。
+<span style="color:#60a5fa;font-weight:700;">慢查询日志用于定位超过 `long_query_time` 等阈值的 SQL，是性能排查的重要入口。</span>默认未开启；`long_query_time` 默认为 10 秒，最小为 0，精度可到微秒。
 
 ```sql
 #慢查询日志

@@ -111,6 +111,18 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
   // 右侧边栏组件配置列表
   rightComponents: [
     {
+      // 组件类型：最新动态（显示在今日一言上方）
+      type: "dynamic",
+      enable: true,
+      position: "top",
+      showOnPostPage: true,
+      specificConfig: {
+        dynamic: {
+          limit: 2,
+        },
+      },
+    },
+    {
       // 组件类型：今日一言
       type: "quoteOfTheDay",
       // 是否启用该组件

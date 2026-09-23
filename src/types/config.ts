@@ -62,21 +62,9 @@ export type SiteConfig = {
 		theme: "github" | "obsidian" | "vitepress";
 	};
 
-	// bangumi配置
-	bangumi?: {
-		userId?: string; // Bangumi用户ID
-		categoryOrder?: ("anime" | "game" | "book" | "music" | "real")[]; // 条目类型排序顺序
-	};
-
-	// 追番配置（Bilibili + TMDB）
-	anime?: {
-		bilibili?: {
-			uid: string; // Bilibili 用户 UID
-		};
-		tmdb?: {
-			apiKey: string; // TMDB API Key (v3)
-			listId: string; // TMDB 自定义列表 ID
-		};
+	// 独立 Bilibili 追番页配置
+	bilibili?: {
+		uid: string;
 	};
 
 	generateOgImages: boolean;
@@ -109,10 +97,12 @@ export type SiteConfig = {
 		friends: boolean; // 友链页面开关
 		sponsor: boolean; // 赞助页面开关
 		guestbook: boolean; // 留言板页面开关
-		bangumi: boolean;
 		gallery: boolean; // 相册页面开关
-		anime: boolean; // 追番页面开关
 		bookmarks: boolean; // 导航（书签）页面开关
+		dynamic: boolean; // 动态页面开关
+		projects: boolean; // 项目展示页开关
+		booknav: boolean; // 新版书签导航页面开关
+		bilibili: boolean; // 独立 Bilibili 追番页面开关
 	};
 
 	// 分类导航栏开关
@@ -214,12 +204,10 @@ export enum LinkPreset {
 	Friends = 3,
 	Sponsor = 4,
 	Guestbook = 5,
-	Bangumi = 6,
-	Gallery = 7,
-	Tags = 8,
-	Categories = 9,
-	Anime = 10,
-	Bookmarks = 11,
+	Gallery = 6,
+	Tags = 7,
+	Categories = 8,
+	Bookmarks = 9,
 }
 
 export type NavBarLink = {
@@ -486,7 +474,8 @@ export type WidgetComponentType =
   | "calendar"
   | "quoteOfTheDay"
   | "music"
-  | "schedule";
+  | "schedule"
+  | "dynamic";
 
 export type WidgetComponentConfig = {
 	type: WidgetComponentType; // 组件类型
@@ -495,6 +484,12 @@ export type WidgetComponentConfig = {
 	configId?: string; // 配置ID，用于广告组件指定使用哪个配置
 	showOnPostPage?: boolean; // 是否在文章详情页显示
 	showOnNonPostPage?: boolean; // 是否在非文章详情页显示
+	showTitle?: boolean; // 是否显示组件标题，默认 true
+	specificConfig?: {
+		dynamic?: {
+			limit?: number; // 最新动态显示数量
+		};
+	};
 	responsive?: {
 		hidden?: ("mobile" | "tablet" | "desktop")[]; // 在指定设备上隐藏
 		collapseThreshold?: number; // 折叠阈值

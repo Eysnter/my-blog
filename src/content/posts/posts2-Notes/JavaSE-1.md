@@ -12,6 +12,8 @@ comment: true
 
 # 一、JAVA 基础概念
 
+> <span style="color:#60a5fa;font-weight:700;">🔵 核心概念</span>　<span style="color:#34d399;font-weight:700;">🟢 推荐实践</span>　<span style="background-color:rgba(251,191,36,.20);color:#f59e0b;font-weight:700;padding:2px 6px;border-radius:4px;">🟡 高频考点</span>　<span style="color:#f87171;font-weight:700;text-decoration:underline wavy #f87171;text-underline-offset:3px;">🔴 风险 / 易错点</span>
+
 ##  一、注释 (Comments)
 java 里的三种注释:
 - 单行注释
@@ -37,7 +39,7 @@ java 里的三种注释:
 
 ## 二、关键字
 
-被 Java 赋予了特定含义的英文单词。
+<span style="color:#60a5fa;font-weight:700;">关键字是被 Java 语言赋予特定含义的保留单词，不能用作普通标识符。</span>
 
 | **abstract**   | **assert**       | **boolean**   | **break**      | **byte**   |
 | -------------- | ---------------- | ------------- | -------------- | ---------- |
@@ -52,11 +54,11 @@ java 里的三种注释:
 | **transient**  | **try**          | **void**      | **volatile**   | **while**  |
 ### 1、 关键字 class
 
-`class` 表示定义类
+<span style="color:#60a5fa;font-weight:700;">`class` 表示定义类</span>
 `HelloWorld` 类的类名
 `{}` 类的范围
 
-<u>类：Java 项目最基本的组成单元，一个完整的 Java 项目有可能会有成千上万个类来组成的。</u>
+<span style="text-decoration:underline wavy #60a5fa;text-underline-offset:3px;">类是 Java 程序最基本的组成单元，一个完整项目通常由多个类共同组成。</span>
 
 ```java
 class HelloWorld{
@@ -65,7 +67,7 @@ class HelloWorld{
 ```
 
 ### 2、 字面量 (Literals)
-**作用**：数据在程序中的书写格式。
+<span style="color:#60a5fa;font-weight:700;">字面量：数据在程序源代码中的直接书写形式。</span>
 
 | **字面量类型** | **说明**                    | **程序中的写法**          |
 | --------- | ------------------------- | ------------------- |
@@ -98,13 +100,13 @@ HelloWorld
 
 
 ## 三、变量
-- **本质**：内存中用来临时存储单个数据的容器。
+- <span style="color:#60a5fa;font-weight:700;">本质：变量是内存中用于临时存储数据的容器。</span>
 - **定义格式**：
 $$\text{数据类型} \quad \text{变量名} = \text{数据值};$$
 
-1、 **不能重名**：在同一个作用域（同一对 `{}`）内，变量名不允许重复定义。 
-1. **必须初始化**：变量在使用（如打印、参与运算）之前，**必须先赋值**，否则编译报错。
-2、 **类型约束**：变量只能存储符合其定义时指定的数据类型的数据。
+1. <span style="color:#f87171;font-weight:700;">不能重名：</span>在同一个作用域（同一对 `{}`）内，变量名不允许重复定义。
+2. <span style="color:#f59e0b;font-weight:700;">必须初始化：</span>局部变量在使用（如打印、参与运算）之前必须先赋值，否则编译报错。
+3. <span style="color:#60a5fa;font-weight:700;">类型约束：</span>变量只能存储与声明类型兼容的数据。
 
 - **核心规则代码演示**：
 ```java
@@ -153,10 +155,10 @@ public class GameTest {
 ```
 
 ## 四、数据类型
-Java 的数据类型分为两大家族：**基本数据类型** 与 **引用数据类型**（如 `String`、数组、自定义类等）。
+Java 的数据类型分为两大家族：<span style="color:#60a5fa;font-weight:700;">基本数据类型</span>与<span style="color:#a78bfa;font-weight:700;">引用数据类型</span>（如 `String`、数组、自定义类等）。
 
 ### 1、 8种基本数据类型
-- **整数默认类型为 `int`，浮点数默认类型为 `double`**。
+- <span style="background-color:rgba(251,191,36,.18);color:#f59e0b;font-weight:700;padding:2px 6px;border-radius:4px;">整数常量默认是 `int`，浮点常量默认是 `double`。</span>
 
 | 分类      | 关键字       | 占用字节 (Byte) | 取值范围                                          | 默认后缀要求               |
 | ------- | --------- | ----------- | --------------------------------------------- | -------------------- |
@@ -164,10 +166,13 @@ Java 的数据类型分为两大家族：**基本数据类型** 与 **引用数�
 |         | `short`   | 2           | $-32768 \sim 32767$                           | 无                    |
 |         | `int`     | 4           | 约 $\pm 21$ 亿                                  | 无                    |
 |         | `long`    | 8           | $-2^{63} \sim 2^{63}-1$                       | 数值后必须加 **`L`** / `l` |
-| **浮点数** | `float`   | 4           | $1、4 \times 10^{-45} \sim 3、4 \times 10^{38}$ | 数值后必须加 **`F`** / `f` |
+| **浮点数** | `float`   | 4           | $1.4 \times 10^{-45} \sim 3.4 \times 10^{38}$ | 数值后必须加 **`F`** / `f` |
 |         | `double`  | 8           | 精度更高，取值更大                                     | 无                    |
 | **字符**  | `char`    | 2           | $0 \sim 65535$ (字符的 Unicode 码)                | 无                    |
 | **布尔**  | `boolean` | 1           | `true` 或 `false`                              | 无                    |
+
+<span style="color:#f87171;font-weight:700;text-decoration:underline wavy #f87171;text-underline-offset:3px;">易错：long 字面量建议使用大写 `L`，float 字面量必须添加 `F`/`f` 后缀；`boolean` 只能取 `true` 或 `false`。</span>
+
 ### 2、数据类型实战：
 ```java
 public class VariableTest {
@@ -218,16 +223,16 @@ public class VariableTest {
 
 ### 1、硬性要求
 
-1、 只能由 **数字、字母、下划线 `_`、美元符号 `$`** 组成。 
-1. **绝对不能以数字开头**。
-2、 **不能是 Java 关键字**（如：不能用 `class`、`public`、`void` 做变量名）。
-2. **严格区分大小写**（如 `username` 和 `userName` 是两个不同的变量）。
+1. 只能由<span style="color:#60a5fa;font-weight:700;">数字、字母、下划线 `_`、美元符号 `$`</span>组成。
+2. <span style="color:#f87171;font-weight:700;">绝对不能以数字开头。</span>
+3. <span style="color:#f87171;font-weight:700;">不能是 Java 关键字</span>（如：不能用 `class`、`public`、`void` 做变量名）。
+4. <span style="color:#f59e0b;font-weight:700;">严格区分大小写</span>（如 `username` 和 `userName` 是两个不同的变量）。
 ### 2、软性规范
 
-- **小驼峰命名法（用于：变量名、方法名）**：
+- <span style="color:#34d399;font-weight:700;">小驼峰命名法（变量名、方法名）</span>：
     - 单个单词：全小写。例如：`name`，`age`。 
     - 多个单词：从第二个单词开始，首字母大写。例如：`firstName`，`maxAge`，`studentCount`。 
-- **大驼峰命名法（用于：类名）**：
+- <span style="color:#a78bfa;font-weight:700;">大驼峰命名法（类名）</span>：
     - 每个单词的首字母都要大写。例如：`Demo`，`HelloWorld`，`ScannerDemo`。
 ### 3、阿里巴巴命名规范
 
@@ -237,7 +242,7 @@ public class VariableTest {
 - **不要无故使用下划线 `_` 或美元符 `$` 命名**：
     - ❌ 错误示例：`_name`、`$money`、`gender_`  
     - 正确示例：`name`、`money`、`gender`  
-- **起名必须“见名知意”**：避免定义 `int a`, `double b` 这种毫无实际意义的命名。
+- <span style="color:#34d399;font-weight:700;">命名必须“见名知意”</span>：避免定义 `int a`、`double b` 这类缺少业务含义的名称。
 
 
 ---
@@ -247,6 +252,9 @@ public class VariableTest {
 当需要从控制台接收用户输入的数据时，直接使用 Java 内置的 `Scanner` 工具类。
 
 ### 极简三步法模板：
+
+<span style="background-color:rgba(96,165,250,.14);color:#60a5fa;font-weight:700;padding:2px 6px;border-radius:4px;">Scanner 三步：导包 → 创建对象 → 调用 `nextXxx()` 读取数据。</span>
+
 ```java
 // 第一步：导包（必须写在类定义 class 的上面）
 import java.util.Scanner; 
@@ -269,9 +277,10 @@ public class ScannerDemo {
 
 ### 1、 隐式转换（自动类型提升）
 
-- **规则**：小范围数据赋给大范围变量时，程序自动完成转换（小的给大的，直接给）。  
-- **方向**：$\text{byte} \rightarrow \text{short}/\text{char} \rightarrow \text{int} \rightarrow \text{long} \rightarrow \text{float} \rightarrow \text{double}$
-- **🔥 核心铁律（必考）**：**`byte`、`short`、`char` 只要参与运算，无条件先提升为 `int`**。
+- **规则**：表示范围较小的数值类型赋给范围较大的类型时，编译器可自动完成转换。
+- **方向**：`byte → short → int → long → float → double`；`char → int → long → float → double`。
+- <span style="color:#f87171;font-weight:700;">注意：`byte`/`short` 与 `char` 之间不能直接进行隐式转换。</span>
+- <span style="background-color:rgba(251,191,36,.20);color:#f59e0b;font-weight:700;padding:2px 6px;border-radius:4px;">必考：`byte`、`short`、`char` 参与算术运算时，会先提升为 `int`。</span>
     
 - **极简自测**：
     
@@ -281,11 +290,11 @@ public class ScannerDemo {
 
 ### 2、 强制类型转换
 
-- **规则**：大范围强转给小范围。格式为 `目标类型 变量 = (目标类型)数据;`。
+- **规则**：大范围类型转换为小范围类型时，需要显式强制转换：`目标类型 变量 = (目标类型) 数据;`。
     
-- **副作用**：会导致**精度丢失**（浮点转整直接抹去小数部分）或**数据溢出**。
+- <span style="color:#f87171;font-weight:700;text-decoration:underline wavy #f87171;text-underline-offset:3px;">副作用：强制转换可能造成精度丢失或数据溢出，且不会自动报错。</span>
 ```java
-double a = 12、3;
+double a = 12.3;
 int b = (int) a; // b = 12 (小数部分直接丢失)
 ```
 
@@ -295,17 +304,17 @@ int b = (int) a; // b = 12 (小数部分直接丢失)
 
 - 符号：`+`、`-`、`*`、`/`、`%`。
     
-- **`/` (除法) 陷阱**：
+- <span style="color:#f87171;font-weight:700;">`/`（除法）陷阱：</span>
     1、 整数相除只能得到整除结果（截断舍弃小数）。如 `10 / 3` 的结果是 `3`。
     1. 如果想要得到小数结果，必须有浮点数（小数）参与运算。
-    2、 浮点数直接运算可能得到不精确的结果（例如 `10.0 / 3` 在 Java 中输出 `3、3333333333333335`）。
+    3. 浮点数直接运算可能得到不精确的结果（例如 `10.0 / 3` 在 Java 中近似输出 `3.3333333333333335`）。
 
-- **`%` (取模/求余) 的本质**：做除法运算并获取余数。
-    - 常用场景：判断奇偶数。`num % 2 == 0`（偶数），`num % 2 == 1`（奇数）。
+- <span style="color:#60a5fa;font-weight:700;">`%`（取模/求余）的本质：做除法运算并获取余数。</span>
+    - 判断奇偶：`num % 2 == 0` 为偶数，`num % 2 != 0` 为奇数；使用 `!= 0` 可兼容负奇数。
 
 ### 2、 万能数值拆分公式
 
-对于任意一个整数，可以通过整除 `/` 降位、取模 `%` 留尾的物理特性，精准拆分出各个数位上的数值。
+<span style="background-color:rgba(96,165,250,.14);color:#60a5fa;font-weight:700;padding:2px 6px;border-radius:4px;">数位拆分口诀：整除 `/` 去掉末位，取模 `%` 保留末位。</span>
 
 ```java
 public class SplitNumberDemo {
@@ -338,13 +347,13 @@ public class SplitNumberDemo {
 
 ### 1、 自增自减运算符 (`++`、`--`)
 
-- **核心特征**：不管前自增（`++a`）还是后自增（`a++`），单独 write 在一行时，结果都是让变量自身 `+1`。
+- <span style="color:#60a5fa;font-weight:700;">核心特征：前自增 `++a` 和后自增 `a++` 单独成句时，都会让变量自身加 1。</span>
 
-- **混合运算机制（笔试高频考点）**：
+- <span style="background-color:rgba(251,191,36,.18);color:#f59e0b;font-weight:700;padding:2px 6px;border-radius:4px;">笔试高频：自增参与混合运算时，要区分“先用后加”和“先加后用”。</span>
 
-- **`a++` (后自增)**：**先用后加**。先拿变量原本的值参与当前运算/赋值，整个语句结束后变量自身再 `+1`。
+- **`a++`（后自增）**：<span style="color:#f59e0b;font-weight:700;">先用后加</span>。先使用原值参与当前运算，再让变量自身加 1。
 
-- **`++a` (前自增)**：**先加后用**。变量自身先自增 `+1`，然后再用新值参与运算/赋值。
+- **`++a`（前自增）**：<span style="color:#34d399;font-weight:700;">先加后用</span>。变量先加 1，再使用新值参与运算。
 
 
 ```java
@@ -356,16 +365,16 @@ int c = ++a; // a = 12, c = 12
 
 - **核心规则**：
 
-1、 当 `+` 操作中**出现字符串**时，该 `+` 变成**字符串连接符**，进行数据拼接并产生全新字符串。 
-1. 连续进行 `+` 操作时，执行顺序自左向右。
+1. 当 `+` 运算中出现字符串时，后续 `+` 会按字符串连接处理，并产生新字符串。
+2. 连续 `+` 运算默认从左向右执行，括号可以改变计算顺序。
 
 - **经典面试演练**：
 	- `1 + "abc" + 1` $\rightarrow$ 结果：`"1abc1"`
 	- `1 + 2 + "abc" + 2 + 1` $\rightarrow$ 结果：`"3abc21"`（前两个整数正常加法运算，随后转为拼接）
 ### 3、 字符的 `+` 操作
 
-- **核心规则**：当 `+` 操作中出现字符，会拿着字符去 ASCII 码表中查到对应的数字进行计算。
-- **必须牢记的 ASCII 码值**： $$\text{'a'} \rightarrow 97 \quad | \quad \text{'A'} \rightarrow 65 \quad | \quad \text{'0'} \rightarrow 48$$
+- <span style="color:#60a5fa;font-weight:700;">核心规则：`char` 参与算术运算时会提升为 `int`，使用其 Unicode 编码值参与计算。</span>
+- <span style="background-color:rgba(251,191,36,.18);color:#f59e0b;font-weight:700;padding:2px 6px;border-radius:4px;">常见字符编码值：`'a' = 97`、`'A' = 65`、`'0' = 48`。</span>
 ```java
 char c = 'a';
 System.out.println(c + 0); // 输出 97
@@ -374,7 +383,7 @@ System.out.println(c + 0); // 输出 97
 
 ### 1、 扩展赋值运算符 (`+=`、`-=`、`*=`、`/=`、`%=`)
 
-- **底层机制（大坑 ⚠️）**：扩展赋值运算符**隐式包含了一次强制类型转换**。
+- <span style="color:#f87171;font-weight:700;text-decoration:underline wavy #f87171;text-underline-offset:3px;">易错：扩展赋值运算符会隐式包含一次强制类型转换。</span>
     
     ```java
     byte a = 10;
@@ -383,8 +392,8 @@ System.out.println(c + 0); // 输出 97
     a += b;       // 编译通过！底层等价于 a = (byte)(a + b);
     ```
 
-- 关系运算符最终的返回结果**必须是布尔类型**（`true` 或 `false`）。
-- **避坑**：在做等于判断时，
+- 关系运算符最终返回的结果一定是 <span style="color:#60a5fa;font-weight:700;">boolean（`true` 或 `false`）</span>。
+- <span style="color:#f87171;font-weight:700;">避坑：`=` 表示赋值，`==` 才表示相等比较；引用类型的内容比较通常使用 `equals()`。</span>
 
 ## 六、逻辑与短路运算符
 
@@ -401,15 +410,15 @@ System.out.println(c + 0); // 输出 97
 
 ### 2、 短路逻辑运算符 (`&&`、`||`)
 
-- **底层机制（短路效果）**：当左边的表达式已经能够确定整个逻辑表达式的最终结果时，**右边的表达式将直接被跳过不执行**。
+- <span style="color:#60a5fa;font-weight:700;">短路机制：左侧表达式已经能决定最终结果时，右侧表达式不会执行。</span>
     
     - `&&` (短路与)：左边为 `false` 时发生短路，右边不执行（整体直接为 `false`）。
     - `||` (short-circuit or / 短路或)：左边为 `true` 时发生短路，右边不执行（整体直接为 `true`）。
         
 - **实战价值**：
     
-    1、 **提升运行性能**：免去后续无意义的运算。
-    1. **防范空指针异常（关键防线）**：
+    1. **提升运行性能**：免去后续无意义的运算。
+    2. <span style="color:#34d399;font-weight:700;">防范空指针异常：先检查对象不为 `null`，再访问其成员。</span>
 ```java
 // 如果 str 为 null，不使用短路与，str.length() 将在运行时抛出空指针异常
 if (str != null && str.length() > 0) {
@@ -421,7 +430,7 @@ if (str != null && str.length() > 0) {
 - **格式**：$$\text{关系表达式} \ ? \ \text{表达式1} \ : \ \text{表达式2};$$
 - **规则**：若关系表达式为真，执行表达式 1 并返回结果；若为假，执行表达式 2 并返回结果。
     
-- **硬性要求**：三元运算符计算的最终结果**必须被使用**（要么赋值给变量，要么直接打印输出）。
+- <span style="color:#f87171;font-weight:700;">硬性要求：三元运算符产生的结果必须被使用，例如赋值、返回或直接输出。</span>
 ### 经典案例演练
 
 - **练习 1：判断两只老虎体重是否相同**
@@ -448,6 +457,6 @@ int max = temp > height3 ? temp : height3; // max = 210
 
 **核心法则：**
 
-1、 **小括号 `()` 的优先级最高，优先于一切。**
+1. <span style="background-color:rgba(251,191,36,.18);color:#f59e0b;font-weight:700;padding:2px 6px;border-radius:4px;">小括号 `()` 的优先级最高。</span>
     
-2、 实际开发中，任何无法直接笃定优先顺序的场景，**直接加小括号 `()`**，既保证运行安全，又极大提升了代码可读性。
+2. 实际开发中，无法立即确认优先级时，<span style="color:#34d399;font-weight:700;">直接使用小括号明确意图</span>，可同时避免错误并提高可读性。

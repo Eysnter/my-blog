@@ -420,11 +420,10 @@ const mobileQuality = Math.round(configQuality * 0.9);
             var container = document.getElementById('banner-images-container');
             if (!container) return;
 
-            var WALLPAPER_BANNER = 'banner';
             var interval = parseInt(container.dataset.carouselInterval || '5000', 10);
             var switchable = container.dataset.carouselSwitchable === 'true';
             var defaultEnabled = container.dataset.carouselEnabled === 'true';
-            var FADE_MS = 1000;
+            var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
             function isCarouselEnabled() {
                 if (!switchable) return defaultEnabled;
@@ -464,6 +463,21 @@ const mobileQuality = Math.round(configQuality * 0.9);
                 return 0;
             }
 
+            // 提前唤醒下一张懒加载图片，降低轮播切换时的空白和闪烁。
+            function preloadSlide(slide) {
+                if (!slide) return;
+                var image = slide.querySelector('img');
+                if (!image) return;
+                image.loading = 'eager';
+                if (typeof image.decode === 'function') image.decode().catch(function() {});
+            }
+
+            function preloadNextSlide() {
+                var slides = getVisibleSlides();
+                if (slides.length <= 1) return;
+                preloadSlide(slides[(getCurrentIndex(slides) + 1) % slides.length]);
+            }
+
             function changeToSlide(targetIndex, resetProgress) {
                 var slides = getVisibleSlides();
                 if (slides.length <= 1) return;
@@ -471,6 +485,8 @@ const mobileQuality = Math.round(configQuality * 0.9);
                 var nextIndex = targetIndex;
                 if (nextIndex >= slides.length) nextIndex = 0;
                 else if (nextIndex < 0) nextIndex = slides.length - 1;
+
+                preloadSlide(slides[nextIndex]);
 
                 // Slide 效果需要 prev-waiting 辅助类
                 var effect = container.className;
@@ -486,6 +502,8 @@ const mobileQuality = Math.round(configQuality * 0.9);
                     else slides[j].classList.remove('active');
                 }
 
+                preloadNextSlide();
+
                 if (resetProgress !== false && appState.isPlaying) {
                     startAutoPlay();
                 }
@@ -495,13 +513,17 @@ const mobileQuality = Math.round(configQuality * 0.9);
                 isPlaying: false,
                 autoPlayTimer: null,
                 touchStartX: 0,
-                touchEndX: 0
+                touchStartY: 0,
+                touchEndX: 0,
+                touchEndY: 0,
+                resizeTimer: null
             };
 
             function startAutoPlay() {
                 stopAutoPlay();
                 if (!isCarouselEnabled()) return;
                 if (!isBannerWallpaperMode()) return;
+                if (document.hidden || reducedMotion.matches) return;
 
                 appState.isPlaying = true;
                 appState.autoPlayTimer = setTimeout(function advance() {
@@ -524,6 +546,8 @@ const mobileQuality = Math.round(configQuality * 0.9);
             // 键盘控制
             document.addEventListener('keydown', function(e) {
                 if (!isBannerWallpaperMode() || !isCarouselEnabled()) return;
+                var target = e.target;
+                if (target && (target.closest('input, textarea, select, button, a, [contenteditable="true"]'))) return;
                 if (e.key === 'ArrowRight') {
                     var slides = getVisibleSlides();
                     changeToSlide(getCurrentIndex(slides) + 1);
@@ -539,11 +563,14 @@ const mobileQuality = Math.round(configQuality * 0.9);
             // 触屏滑动
             document.addEventListener('touchstart', function(e) {
                 appState.touchStartX = e.changedTouches[0].screenX;
+                appState.touchStartY = e.changedTouches[0].screenY;
             }, { passive: true });
             document.addEventListener('touchend', function(e) {
                 appState.touchEndX = e.changedTouches[0].screenX;
+                appState.touchEndY = e.changedTouches[0].screenY;
                 var diff = appState.touchEndX - appState.touchStartX;
-                if (Math.abs(diff) > 50) {
+                var verticalDiff = appState.touchEndY - appState.touchStartY;
+                if (Math.abs(diff) > 50 && Math.abs(diff) > Math.abs(verticalDiff) * 1.2) {
                     var slides = getVisibleSlides();
                     if (diff > 0) changeToSlide(getCurrentIndex(slides) - 1);
                     else changeToSlide(getCurrentIndex(slides) + 1);
@@ -562,6 +589,30 @@ const mobileQuality = Math.round(configQuality * 0.9);
                 }
             });
 
+            // 页面切到后台时不消耗计时器；回来后从完整间隔重新开始。
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) stopAutoPlay();
+                else startAutoPlay();
+            });
+
+            function handleMotionPreference() {
+                reducedMotion.matches ? stopAutoPlay() : startAutoPlay();
+            }
+            if (typeof reducedMotion.addEventListener === 'function') {
+                reducedMotion.addEventListener('change', handleMotionPreference);
+            } else if (typeof reducedMotion.addListener === 'function') {
+                reducedMotion.addListener(handleMotionPreference);
+            }
+
+            // 横竖屏或跨桌面断点后，重新识别当前设备图片组并预加载下一张。
+            window.addEventListener('resize', function() {
+                clearTimeout(appState.resizeTimer);
+                appState.resizeTimer = setTimeout(function() {
+                    preloadNextSlide();
+                    if (appState.isPlaying) startAutoPlay();
+                }, 150);
+            });
+
             // 随机首张
             var slides = getVisibleSlides();
             if (slides.length > 1) {
@@ -571,6 +622,8 @@ const mobileQuality = Math.round(configQuality * 0.9);
                     else slides[k].classList.remove('active');
                 }
             }
+
+            preloadNextSlide();
 
             // 启动
             if (isCarouselEnabled() && isBannerWallpaperMode()) {

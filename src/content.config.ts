@@ -37,6 +37,40 @@ const specCollection = defineCollection({
 	schema: z.object({}),
 });
 
+const dynamicCollection = defineCollection({
+	loader: glob({ pattern: "**/*.md", base: "./src/content/dynamic" }),
+	schema: z.object({
+		published: z.date(),
+		pinned: z.boolean().optional().default(false),
+		location: z.string().optional().default(""),
+	}),
+});
+
+const projectsCollection = defineCollection({
+	loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/projects" }),
+	schema: z.object({
+		title: z.string(),
+		published: z.date(),
+		draft: z.boolean().optional().default(false),
+		order: z.number().optional(),
+		description: z.string().optional().default(""),
+		image: z.string().optional().default(""),
+		tags: z.array(z.string()).optional().default([]),
+		link: z
+			.array(
+				z.object({
+					label: z.string(),
+					icon: z.string().optional().default(""),
+					value: z.string(),
+				}),
+			)
+			.optional()
+			.default([]),
+		status: z.string().optional().default(""),
+		lang: z.string().optional().default(""),
+	}),
+});
+
 const ziyuanCollection = defineCollection({
 	loader: glob({ pattern: "**/*.md", base: "./src/content/ziyuan" }),
 	schema: z.union([
@@ -71,8 +105,9 @@ const ziyuanCollection = defineCollection({
 
 
 export const collections = {
+	dynamic: dynamicCollection,
 	posts: postsCollection,
+	projects: projectsCollection,
 	spec: specCollection,
 	ziyuan: ziyuanCollection,
 };
-

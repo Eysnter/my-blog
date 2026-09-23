@@ -7,7 +7,7 @@ import { zh_CN } from "./languages/zh_CN";
 import { zh_TW } from "./languages/zh_TW";
 
 export type Translation = {
-	[K in I18nKey]: string;
+	[K in I18nKey]?: string;
 };
 
 const defaultTranslation = en;
@@ -42,5 +42,5 @@ export function i18n(key: I18nKey): string {
 		}
 	}
 
-	return value || defaultTranslation[key];
+	return value || defaultTranslation[key] || key;
 }

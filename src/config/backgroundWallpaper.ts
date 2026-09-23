@@ -124,8 +124,6 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
         "/guestbook": "💬 留下你的足迹与心声",
         "/gallery": "📷 定格美好瞬间",
         "/sponsor": "❤️ 感谢每一份支持与鼓励",
-        "/bangumi": "🎬 追番记录与二次元日常",
-        "/anime": "📺 从 Bilibili 和 TMDB 同步追番记录",
         "/tags": "🏷️ 按标签浏览文章",
         "/categories": "📂 按分类浏览文章",
       },

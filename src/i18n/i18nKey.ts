@@ -23,6 +23,64 @@ enum I18nKey {
 	tocEmpty = "tocEmpty",
 	music = "music",
 
+	// 动态
+	dynamic = "dynamic",
+	latestDynamics = "latestDynamics",
+	moreDynamics = "moreDynamics",
+	dynamicDescription = "dynamicDescription",
+	dynamicEmpty = "dynamicEmpty",
+	dynamicSearch = "dynamicSearch",
+	dynamicNoResults = "dynamicNoResults",
+	dynamicLoading = "dynamicLoading",
+	dynamicAllYears = "dynamicAllYears",
+	dynamicProfile = "dynamicProfile",
+	dynamicPermalink = "dynamicPermalink",
+	dynamicCollapseGallery = "dynamicCollapseGallery",
+	dynamicViewOriginal = "dynamicViewOriginal",
+	dynamicPreviousImage = "dynamicPreviousImage",
+	dynamicNextImage = "dynamicNextImage",
+	dynamicViewImage = "dynamicViewImage",
+	dynamicSelectImage = "dynamicSelectImage",
+
+	// 书签导航
+	booknav = "booknav",
+	booknavDescription = "booknavDescription",
+	searchBooknav = "searchBooknav",
+	booknavEmpty = "booknavEmpty",
+
+	// 项目
+	projects = "projects",
+	projectsDescription = "projectsDescription",
+	projectDetails = "projectDetails",
+	projectBack = "projectBack",
+	projectEmpty = "projectEmpty",
+	projectSearch = "projectSearch",
+	projectStatusPlanning = "projectStatusPlanning",
+	projectStatusDeveloping = "projectStatusDeveloping",
+	projectStatusPublished = "projectStatusPublished",
+	projectStatusArchived = "projectStatusArchived",
+
+	// 独立 Bilibili 追番页
+	bilibili = "bilibili",
+	bilibiliSubtitle = "bilibiliSubtitle",
+	bilibiliNotConfigured = "bilibiliNotConfigured",
+	bilibiliNotConfiguredDesc = "bilibiliNotConfiguredDesc",
+	animeBilibiliAvg = "animeBilibiliAvg",
+	animeRatingDesc = "animeRatingDesc",
+	animeRatingAsc = "animeRatingAsc",
+	animeDateDesc = "animeDateDesc",
+	animeDateAsc = "animeDateAsc",
+	animeViewDetails = "animeViewDetails",
+	animeNoOverview = "animeNoOverview",
+	animeClose = "animeClose",
+	animeSynopsis = "animeSynopsis",
+	animeTypeAnime = "animeTypeAnime",
+	animeTypeMovie = "animeTypeMovie",
+	animeTypeDocumentary = "animeTypeDocumentary",
+	animeTypeChinese = "animeTypeChinese",
+	animeTypeDrama = "animeTypeDrama",
+	animeTypeConcert = "animeTypeConcert",
+
 	// 公告栏
 	announcement = "announcement",
 	announcementClose = "announcementClose",
@@ -175,6 +233,7 @@ enum I18nKey {
 	paginationOf = "paginationOf",
 	paginationTotal = "paginationTotal",
 	paginationRecords = "paginationRecords",
+	paginationJump = "paginationJump",
 
 	// 404页面
 	notFound = "notFound",

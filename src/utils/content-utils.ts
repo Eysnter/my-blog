@@ -64,6 +64,25 @@ export async function getSortedPosts() {
 
 	return sorted;
 }
+
+export async function getSortedProjects(): Promise<
+	CollectionEntry<"projects">[]
+> {
+	const projects = await getCollection("projects", ({ data }) =>
+		import.meta.env.PROD ? data.draft !== true : true,
+	);
+	return projects.sort((a, b) => {
+		const orderA = a.data.order;
+		const orderB = b.data.order;
+		if (orderA !== undefined || orderB !== undefined) {
+			if (orderA === undefined) return 1;
+			if (orderB === undefined) return -1;
+			if (orderA !== orderB) return orderB - orderA;
+		}
+		const dateDiff = b.data.published.getTime() - a.data.published.getTime();
+		return dateDiff || a.data.title.localeCompare(b.data.title);
+	});
+}
 export type PostForList = {
 	id: string;
 	data: CollectionEntry<"posts">["data"];

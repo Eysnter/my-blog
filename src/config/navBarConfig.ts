@@ -38,17 +38,27 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
           // 我的及其子菜单
           links.push({
             name: "我的",
-            url: "/my/",
+            url: "#",
             icon: "material-symbols:person",
             children: [
+              ...(siteConfig.pages.dynamic
+                ? [{ name: "动态", url: "/dynamic/", icon: "material-symbols:forum-rounded" }]
+                : []),
+
+              ...(siteConfig.pages.projects
+                ? [{ name: "项目", url: "/projects/", icon: "material-symbols:rocket-launch" }]
+                : []),
+
               // 根据配置决定是否添加相册，在siteConfig关闭pages.gallery时导航栏不显示相册
               ...(siteConfig.pages.gallery ? [LinkPreset.Gallery] : []),
 
-              // 根据配置决定是否添加番组计划，在siteConfig关闭pages.bangumi时导航栏不显示番组计划
-              ...(siteConfig.pages.bangumi ? [LinkPreset.Bangumi] : []),
+              ...(siteConfig.pages.booknav
+                ? [{ name: "书签导航", url: "/booknav/", icon: "material-symbols:bookmarks" }]
+                : []),
 
-              // 根据配置决定是否添加追番，在siteConfig关闭pages.anime时导航栏不显示追番
-              ...(siteConfig.pages.anime ? [LinkPreset.Anime] : []),
+              ...(siteConfig.pages.bilibili
+                ? [{ name: "哔哩哔哩", url: "/bilibili/", icon: "fa7-brands:bilibili" }]
+                : []),
 
               // 根据配置决定是否添加留言板，在siteConfig关闭pages.guestbook时导航栏不显示留言板
               ...(siteConfig.pages.guestbook ? [LinkPreset.Guestbook] : []),

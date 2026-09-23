@@ -58,7 +58,7 @@ Firefly 项目中所有可复用组件的集中管理。组件按照功能和职
 - `PioMessageBox.astro` - 消息框组件（Live2D/Spine 消息显示）
 
 **分页组件**
-- `ClientPagination.astro` - 客户端分页（JavaScript 控制）
+- `ClientPagination.svelte` - 客户端分页
 - `Pagination.astro` - 静态路由分页（Astro 原生）
 
 ### 🧩 widget/ - 小部件
@@ -69,6 +69,7 @@ Firefly 项目中所有可复用组件的集中管理。组件按照功能和职
 - `Announcement.astro` - 公告组件
 - `Calendar.astro` - 日历组件
 - `Categories.astro` - 分类组件
+- `Dynamic.astro` - 最新动态组件
 - `Live2DWidget.astro` - Live2D 看板娘组件
 - `Music.astro` - 音乐播放器小部件
 - `Profile.astro` - 个人信息/社交链接小部件
@@ -99,11 +100,11 @@ Firefly 项目中所有可复用组件的集中管理。组件按照功能和职
 
 - `AdvancedSearch.svelte` - 高级搜索组件
 
-**pages/bangumi/** - 番组计划页面组件
-- `BangumiSection.astro` - 番组分类展示组件
-- `Card.astro` - 番组卡片组件
-- `FilterControls.astro` - 筛选控制组件
-- `TabNav.astro` - 标签导航组件
+**pages/bilibili/** - Bilibili 追番页面组件
+
+**pages/dynamic/** - 动态页面组件
+
+**pages/projects/** - 项目页面组件
 
 ### 💬 comment/ - 评论系统组件
 

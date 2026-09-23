@@ -34,11 +34,13 @@ export type {
 export { adConfig1, adConfig2 } from "./adConfig"; // 广告配置
 export { announcementConfig } from "./announcementConfig"; // 公告配置
 export { bookmarksPageConfig } from "./bookmarksConfig"; // 书签配置
+export { booknavConfig, booknavPageConfig } from "./booknavConfig"; // 新版书签导航配置
 // 样式配置
 export { backgroundWallpaper } from "./backgroundWallpaper"; // 背景壁纸配置
 // 功能配置
 export { commentConfig } from "./commentConfig"; // 评论系统配置
 export { desktopPetConfig } from "./desktopPetConfig"; // 桌宠配置
+export { dynamicConfig } from "./dynamicConfig"; // 动态页面配置
 export { coverImageConfig } from "./coverImageConfig"; // 封面图配置
 export { sakuraConfig, snowConfig } from "./effectsConfig"; // 动画特效配置（樱花、雪景等）
 export { expressiveCodeConfig } from "./expressiveCodeConfig"; // 代码高亮配置

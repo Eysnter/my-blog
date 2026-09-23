@@ -4,6 +4,7 @@ import Advertisement from "@/components/widget/Advertisement.astro";
 import Announcement from "@/components/widget/Announcement.astro";
 import Calendar from "@/components/widget/Calendar.astro";
 import Categories from "@/components/widget/Categories.astro";
+import Dynamic from "@/components/widget/Dynamic.astro";
 import Music from "@/components/widget/Music.astro";
 import Profile from "@/components/widget/Profile.astro";
 import Schedule from "@/components/widget/Schedule.astro";
@@ -53,6 +54,7 @@ const componentMap = {
   music: Music,
   quoteOfTheDay: QuoteOfTheDay,
   schedule: Schedule,
+  dynamic: Dynamic,
 } satisfies Record<WidgetComponentType, typeof Profile>;
 
 // 获取侧边栏位置
@@ -154,6 +156,10 @@ const getComponentProps = (
   // 特殊处理 SidebarTOC 组件
   if (config.type === "sidebarToc") {
     return { ...baseProps, headings: Astro.props.headings || [] };
+  }
+
+  if (config.type === "dynamic") {
+    return { ...baseProps, widgetConfig: config };
   }
 
   // 特殊处理 Advertisement 组件

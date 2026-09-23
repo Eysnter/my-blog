@@ -398,6 +398,12 @@ html.is-page-transitioning .banner-home-text-overlay {
     z-index: 10;
     pointer-events: auto;
 }
+
+@media (prefers-reduced-motion: reduce) {
+	.slide-item {
+		transition-duration: 0.01ms !important;
+	}
+}
 /* Fade 效果 */
 .effect-fade .slide-item {
     transition-property: opacity;

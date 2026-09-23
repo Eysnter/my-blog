@@ -1,0 +1,61 @@
+/* 书签导航页专属：分组网格、锚点避让、首字母兜底图标 */
+
+/* 自定义元素默认是 inline，需要撑成块级容器 */
+booknav-list {
+	display: block;
+}
+
+/* 与作者版的彩色 favicon 风格保持一致，同时让 Iconify 和分类图标也拥有稳定配色。 */
+[data-accent="0"] { --booknav-accent: #ef4444; }
+[data-accent="1"] { --booknav-accent: #f97316; }
+[data-accent="2"] { --booknav-accent: #eab308; }
+[data-accent="3"] { --booknav-accent: #22c55e; }
+[data-accent="4"] { --booknav-accent: #06b6d4; }
+[data-accent="5"] { --booknav-accent: #3b82f6; }
+[data-accent="6"] { --booknav-accent: #8b5cf6; }
+[data-accent="7"] { --booknav-accent: #ec4899; }
+
+.category-pill {
+	color: var(--booknav-accent);
+	background: color-mix(in srgb, var(--booknav-accent) 11%, transparent);
+	border: 1px solid color-mix(in srgb, var(--booknav-accent) 24%, transparent);
+}
+
+.category-pill:hover {
+	background: color-mix(in srgb, var(--booknav-accent) 19%, transparent);
+}
+
+.booknav-group-icon,
+.booknav-item-icon {
+	color: var(--booknav-accent);
+}
+
+.booknav-icon:has(.booknav-item-icon),
+.booknav-icon:has(.booknav-letter) {
+	background: color-mix(in srgb, var(--booknav-accent) 10%, transparent);
+}
+
+.booknav-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 0.75rem;
+}
+
+/* 避让固定导航栏，与主题其他锚点保持一致 */
+.booknav-group {
+	scroll-margin-top: 5.5rem;
+}
+
+/* 图标缺失时的首字母兜底样式 */
+.booknav-letter {
+	font-size: 1.25rem;
+	font-weight: 700;
+	line-height: 1;
+	color: var(--booknav-accent);
+	background: color-mix(in srgb, var(--booknav-accent) 12%, transparent);
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
