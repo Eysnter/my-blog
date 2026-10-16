@@ -38,30 +38,9 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
    * ],
    */
   src: {
-    // 桌面背景图片（支持单张或多张随机）
-    // desktop: "assets/images/DesktopWallpaper/d1.avif",
-    desktop: [
-      "https://tc.alcy.cc/tc/20260121/27a5408f0f9763b05404c8c8e9bfd034.webp",
-      "https://tc.alcy.cc/tc/20260121/e0133987b1f4d3f81271662bdcedbbd3.webp",
-      "https://tc.alcy.cc/tc/20260121/90667b3e805d4070eb8254a437f56701.webp",
-      "https://tc.alcy.cc/tc/20260121/1c0155509f5979907d5ab297da6b47ed.webp",
-      "https://tc.alcy.cc/tc/20260121/11439d32205082c44f047a0a9d011815.webp",
-      "https://tc.alcy.cc/tc/20260429/bb987bfe3cde592dcd045a7855ce94a9.webp",
-      "https://tc.alcy.cc/tc/20260429/a36b581273df18cfb2cbaaeb7485c6c6.webp",
-      "https://tc.alcy.cc/tc/20260121/1b2ac4412abb7b0f20d4a419bac2f73d.webp",
-      "https://tc.alcy.cc/tc/20260121/c7d3e0cd25e25d0be5aac6453e37282f.webp",
-    ],
-    mobile: [
-      "https://tc.alcy.cc/tc/20260121/27a5408f0f9763b05404c8c8e9bfd034.webp",
-      "https://tc.alcy.cc/tc/20260121/e0133987b1f4d3f81271662bdcedbbd3.webp",
-      "https://tc.alcy.cc/tc/20260121/90667b3e805d4070eb8254a437f56701.webp",
-      "https://tc.alcy.cc/tc/20260121/1c0155509f5979907d5ab297da6b47ed.webp",
-      "https://tc.alcy.cc/tc/20260121/11439d32205082c44f047a0a9d011815.webp",
-      "https://tc.alcy.cc/tc/20260429/bb987bfe3cde592dcd045a7855ce94a9.webp",
-      "https://tc.alcy.cc/tc/20260429/a36b581273df18cfb2cbaaeb7485c6c6.webp",
-      "https://tc.alcy.cc/tc/20260121/1b2ac4412abb7b0f20d4a419bac2f73d.webp",
-      "https://tc.alcy.cc/tc/20260121/c7d3e0cd25e25d0be5aac6453e37282f.webp",
-    ],
+    // 自定义随机风景图接口：每次刷新页面都会返回一张新的 WebP 风景图片。
+    desktop: "https://t.alcy.cc/fj",
+    mobile: "https://t.alcy.cc/fj",
   },
   // 横幅壁纸和全屏壁纸共享配置
   common: {
@@ -170,7 +149,8 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
     position: "0% 20%",
     // 横幅图片轮播配置，仅在当配置多张图片时生效
     carousel: {
-      enable: true,
+      // 单张随机图接口不需要前端轮播；刷新页面即可更换风景图。
+      enable: false,
       interval: 5000,
       // 过渡效果: 'fade' 渐变 | 'zoom' 缩放 | 'slide' 滑动
       transitionEffect: "fade",
