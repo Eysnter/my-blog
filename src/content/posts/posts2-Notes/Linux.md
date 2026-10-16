@@ -1,7 +1,7 @@
 ---
 title: ③ Linux 零基础入门教程
 published: 2026-09-21
-image: ""
+image: "https://img.eysnter.cn/file/posts/Title/1792115927166_Linux_img.png"
 tags: [Linux, 知识点]
 category: "JavaSE"
 draft: false

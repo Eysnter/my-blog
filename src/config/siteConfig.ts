@@ -13,7 +13,7 @@ export const siteConfig: SiteConfig = {
   subtitle: "的小站",
 
   // 站点 URL
-  site_url: "https://eysnter.cn",
+  site_url: "https://blog.eysnter.cn",
 
   // 站点描述
   description:
