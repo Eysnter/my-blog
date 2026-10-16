@@ -1,5 +1,12 @@
 import type { BackgroundWallpaperConfig } from "@/types/config";
 
+// 为随机图接口增加不同的查询参数，避免浏览器把每个轮播项当成同一张缓存图片。
+// 四个槽位会在页面打开时分别获取随机风景图，之后由横幅轮播器循环切换。
+const landscapeCarousel = Array.from(
+  { length: 4 },
+  (_, index) => `https://t.alcy.cc/fj?carousel=${index + 1}`,
+);
+
 export const backgroundWallpaper: BackgroundWallpaperConfig = {
   // 壁纸模式："banner" 横幅壁纸，"fullscreen" 全屏壁纸，"overlay" 全屏透明，"none" 纯色背景无壁纸
   mode: "banner",
@@ -38,9 +45,8 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
    * ],
    */
   src: {
-    // 自定义随机风景图接口：每次刷新页面都会返回一张新的 WebP 风景图片。
-    desktop: "https://t.alcy.cc/fj",
-    mobile: "https://t.alcy.cc/fj",
+    desktop: landscapeCarousel,
+    mobile: landscapeCarousel,
   },
   // 横幅壁纸和全屏壁纸共享配置
   common: {
@@ -149,8 +155,7 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
     position: "0% 20%",
     // 横幅图片轮播配置，仅在当配置多张图片时生效
     carousel: {
-      // 单张随机图接口不需要前端轮播；刷新页面即可更换风景图。
-      enable: false,
+      enable: true,
       interval: 5000,
       // 过渡效果: 'fade' 渐变 | 'zoom' 缩放 | 'slide' 滑动
       transitionEffect: "fade",
