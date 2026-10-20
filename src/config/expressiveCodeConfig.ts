@@ -1,4 +1,5 @@
 import type { ExpressiveCodeConfig } from "../types/config";
+import { applyAdminConfig } from "./admin-runtime";
 
 /**
  * expressive-code配置
@@ -6,7 +7,7 @@ import type { ExpressiveCodeConfig } from "../types/config";
  * 修改本配置后需要重启Astro开发服务器才能生效
  */
 
-export const expressiveCodeConfig: ExpressiveCodeConfig = {
+export const expressiveCodeConfig: ExpressiveCodeConfig = applyAdminConfig("expressiveCodeConfig", {
 	// 暗色主题（用于暗色模式）
 	darkTheme: "one-dark-pro",
 
@@ -29,4 +30,4 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 		// 是否启用语言徽章插件
 		enable: true,
 	},
-};
+});

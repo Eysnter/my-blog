@@ -1,9 +1,10 @@
+import { applyAdminConfig } from "./admin-runtime";
 import type { SidebarLayoutConfig } from "../types/config";
 
 /**
  * 侧边栏布局配置
  */
-export const sidebarLayoutConfig: SidebarLayoutConfig = {
+export const sidebarLayoutConfig: SidebarLayoutConfig = applyAdminConfig("sidebarLayoutConfig", {
   // 是否启用侧边栏功能
   enable: true,
 
@@ -263,4 +264,4 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
       showOnPostPage: true,
     },
   ],
-};
+});

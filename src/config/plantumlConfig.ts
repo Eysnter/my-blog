@@ -1,4 +1,5 @@
 import type { PlantUMLConfig } from "../types/config";
+import { applyAdminConfig } from "./admin-runtime";
 
 /**
  * PlantUML 图表渲染配置
@@ -9,7 +10,7 @@ import type { PlantUMLConfig } from "../types/config";
  * @see https://plantuml.com/zh/theme
  * @see https://plantuml.com/zh/server
  */
-export const plantumlConfig: PlantUMLConfig = {
+export const plantumlConfig: PlantUMLConfig = applyAdminConfig("plantumlConfig", {
 	/**
 	 * 是否启用 PlantUML 渲染能力。
 	 * 关闭时 `plantuml` 代码块退化为普通代码高亮，由 Expressive Code 处理。
@@ -34,4 +35,4 @@ export const plantumlConfig: PlantUMLConfig = {
 	 * 留空字符串表示不注入主题；默认使用内置的 `cyborg` 暗色主题。
 	 */
 	darkTheme: "cyborg",
-};
+});

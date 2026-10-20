@@ -1,7 +1,8 @@
+import { applyAdminConfig } from "./admin-runtime";
 import type { Live2DWidgetConfig, SpineModelConfig } from "../types/config";
 
 // Spine 看板娘配置
-export const spineModelConfig: SpineModelConfig = {
+export const spineModelConfig: SpineModelConfig = applyAdminConfig("spineModelConfig", {
 	// Spine 看板娘开关
 	enable: false,
 
@@ -80,10 +81,10 @@ export const spineModelConfig: SpineModelConfig = {
 
 	// 透明度
 	opacity: 1.0,
-};
+});
 
 // Live2D 看板娘配置 (使用 l2d-widget 库，文档：https://l2d-widget.hacxy.cn)
-export const live2dWidgetConfig: Live2DWidgetConfig = {
+export const live2dWidgetConfig: Live2DWidgetConfig = applyAdminConfig("live2dWidgetConfig", {
 	// Live2D 看板娘开关
 	enable: false,
 	// 模型配置，支持单个模型或数组（多模型切换）
@@ -174,4 +175,4 @@ export const live2dWidgetConfig: Live2DWidgetConfig = {
 		// 移动端断点
 		mobileBreakpoint: 768,
 	},
-};
+});

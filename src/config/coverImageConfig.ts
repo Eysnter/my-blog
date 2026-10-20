@@ -1,3 +1,4 @@
+import { applyAdminConfig } from "./admin-runtime";
 import type { CoverImageConfig } from "../types/config";
 
 /**
@@ -15,7 +16,7 @@ import type { CoverImageConfig } from "../types/config";
  * image: "api"
  * ---
  */
-export const coverImageConfig: CoverImageConfig = {
+export const coverImageConfig: CoverImageConfig = applyAdminConfig("coverImageConfig", {
 	// 是否在文章详情页显示封面图
 	enableInPost: true,
 
@@ -33,4 +34,4 @@ export const coverImageConfig: CoverImageConfig = {
 		// 是否显示加载动画
 		showLoading: false,
 	},
-};
+});

@@ -1,15 +1,16 @@
+import { applyAdminConfig } from "./admin-runtime";
 import { bookmarksPageConfig } from "./bookmarksConfig";
 import type { BookmarkCategory } from "../types/config";
 import type { BooknavGroup, BooknavPageConfig } from "../types/booknavConfig";
 
-export const booknavPageConfig: BooknavPageConfig = {
+export const booknavPageConfig: BooknavPageConfig = applyAdminConfig("booknavPageConfig", {
 	title: bookmarksPageConfig.title,
 	description: bookmarksPageConfig.description,
 	favicon: {
 		enabled: true,
 		api: "https://a.favicon.im/{domain}",
 	},
-};
+});
 
 const toId = (value: string, index: number) => {
 	const normalized = value
@@ -67,6 +68,6 @@ function flattenCategories(
 }
 
 // 继续复用原有 bookmarksConfig.ts 的数据，避免迁移时丢失个人书签。
-export const booknavConfig: BooknavGroup[] = flattenCategories(
+export const booknavConfig: BooknavGroup[] = applyAdminConfig("booknavConfig", flattenCategories(
 	bookmarksPageConfig.categories,
-);
+));

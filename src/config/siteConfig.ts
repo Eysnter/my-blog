@@ -1,3 +1,4 @@
+import { applyAdminConfig } from "./admin-runtime";
 import type { SiteConfig } from "@/types/config";
 import { fontConfig } from "./fontConfig";
 
@@ -5,7 +6,7 @@ import { fontConfig } from "./fontConfig";
 // 语言代码，例如：'zh_CN', 'zh_TW', 'en', 'ja', 'ru'。
 const SITE_LANG = "zh_CN";
 
-export const siteConfig: SiteConfig = {
+export const siteConfig: SiteConfig = applyAdminConfig("siteConfig", {
   // 站点标题
   title: "Eysnter",
 
@@ -273,4 +274,4 @@ export const siteConfig: SiteConfig = {
 
   // 站点语言，在本配置文件顶部SITE_LANG定义
   lang: SITE_LANG,
-};
+});

@@ -1,3 +1,4 @@
+import { applyAdminConfig } from "./admin-runtime";
 import {
 	LinkPreset,
 	type NavBarConfig,
@@ -115,8 +116,8 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 };
 
 // 导航搜索配置
-export const navBarSearchConfig: NavBarSearchConfig = {
+export const navBarSearchConfig: NavBarSearchConfig = applyAdminConfig("navBarSearchConfig", {
 	method: NavBarSearchMethod.PageFind,
-};
+});
 
-export const navBarConfig: NavBarConfig = getDynamicNavBarConfig();
+export const navBarConfig: NavBarConfig = applyAdminConfig("navBarConfig", getDynamicNavBarConfig());

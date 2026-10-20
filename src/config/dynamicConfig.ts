@@ -1,6 +1,7 @@
+import { applyAdminConfig } from "./admin-runtime";
 import type { DynamicConfig } from "@/types/dynamicConfig";
 
-export const dynamicConfig: DynamicConfig = {
+export const dynamicConfig: DynamicConfig = applyAdminConfig("dynamicConfig", {
 	// 页面标题，如果留空则使用 i18n 中的翻译
 	title: "",
 
@@ -36,4 +37,4 @@ export const dynamicConfig: DynamicConfig = {
 		// 注意：需与 Memos API 返回的 creator 字段完全一致（区分大小写），例如实际用户名为 admin 时应为 "users/admin"，而非"users/Admin"
 		parent: "users/xiaye",
 	},
-};
+});

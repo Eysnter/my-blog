@@ -1,8 +1,9 @@
+import { applyAdminConfig } from "./admin-runtime";
 import type { SakuraConfig, SnowConfig } from "../types/config";
 
 // 特效配置 - 集中管理所有动画特效
 
-export const sakuraConfig: SakuraConfig = {
+export const sakuraConfig: SakuraConfig = applyAdminConfig("sakuraConfig", {
 	// 是否启用樱花特效
 	enable: false,
 
@@ -55,9 +56,9 @@ export const sakuraConfig: SakuraConfig = {
 
 	// 层级，确保樱花在合适的层级显示
 	zIndex: 100,
-};
+});
 
-export const snowConfig: SnowConfig = {
+export const snowConfig: SnowConfig = applyAdminConfig("snowConfig", {
 	// 是否启用雪景特效
 	enable: false,
 
@@ -82,4 +83,4 @@ export const snowConfig: SnowConfig = {
 
 	// 层级
 	zIndex: 9999,
-};
+});

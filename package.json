@@ -15,7 +15,10 @@
     "lint": "biome check --write ./src",
     "preinstall": "npx only-allow pnpm",
     "icons": "node scripts/generate-icons.js",
-    "prefetch:music": "node scripts/fetch-music-duration.mjs"
+    "prefetch:music": "node scripts/fetch-music-duration.mjs",
+    "admin:dev": "pnpm build && wrangler dev",
+    "admin:migrate:local": "wrangler d1 migrations apply firefly-admin --local",
+    "admin:migrate:remote": "wrangler d1 migrations apply firefly-admin --remote"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
@@ -76,7 +79,8 @@
     "svelte": "^5.55.8",
     "typescript": "^5.9.2",
     "unist-util-is": "^6.0.1",
-    "unist-util-visit": "^5.1.0"
+    "unist-util-visit": "^5.1.0",
+    "yaml": "2.9.0"
   },
   "devDependencies": {
     "@astrojs/ts-plugin": "^1.10.9",
@@ -93,7 +97,8 @@
     "music-metadata": "^11.0.0",
     "postcss-import": "^16.1.1",
     "postcss-nesting": "^13.0.2",
-    "tailwindcss": "^4.3.0"
+    "tailwindcss": "^4.3.0",
+    "wrangler": "^4.151.2"
   },
   "packageManager": "pnpm@9.14.4"
 }

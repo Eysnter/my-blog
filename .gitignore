@@ -21,6 +21,13 @@ pnpm-debug.log*
 .DS_Store
 
 .vercel
+.wrangler/
+.wrangler-dry-run/
+
+# Cloudflare local-only secrets
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
 
 package-lock.json
 bun.lockb
@@ -37,3 +44,6 @@ Firefly-docs/
 cache/
 package/
 .obsidian/
+
+# Large editable artwork sources stay local (GitHub limits individual files to 100 MB)
+artwork/kanban-musume/*.psd

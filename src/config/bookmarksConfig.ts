@@ -1,7 +1,8 @@
+import { applyAdminConfig } from "./admin-runtime";
 import type { BookmarksPageConfig } from "../types/config";
 
 // 导航（书签）页面配置
-export const bookmarksPageConfig: BookmarksPageConfig = {
+export const bookmarksPageConfig: BookmarksPageConfig = applyAdminConfig("bookmarksPageConfig", {
   // 页面标题，如果留空则使用 i18n 中的翻译
   title: "",
 
@@ -224,4 +225,4 @@ export const bookmarksPageConfig: BookmarksPageConfig = {
       ],
     },
   ],
-};
+});

@@ -1,6 +1,7 @@
+import { applyAdminConfig } from "./admin-runtime";
 import type { AnnouncementConfig } from "../types/config";
 
-export const announcementConfig: AnnouncementConfig = {
+export const announcementConfig: AnnouncementConfig = applyAdminConfig("announcementConfig", {
   // 公告标题
   title: "公告",
 
@@ -25,4 +26,4 @@ export const announcementConfig: AnnouncementConfig = {
     external: false,
   },
 
-};
+});

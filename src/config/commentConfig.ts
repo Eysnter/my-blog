@@ -1,6 +1,7 @@
+import { applyAdminConfig } from "./admin-runtime";
 import type { CommentConfig } from "../types/config";
 
-export const commentConfig: CommentConfig = {
+export const commentConfig: CommentConfig = applyAdminConfig("commentConfig", {
   // 评论系统类型: none, twikoo, waline, giscus, disqus, artalk，默认为none，即不启用评论系统
   type: "twikoo",
 
@@ -82,4 +83,4 @@ export const commentConfig: CommentConfig = {
     // 获取 Disqus 评论系统
     shortname: "firefly",
   },
-};
+});

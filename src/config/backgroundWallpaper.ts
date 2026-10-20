@@ -1,3 +1,4 @@
+import { applyAdminConfig } from "./admin-runtime";
 import type { BackgroundWallpaperConfig } from "@/types/config";
 
 // 为随机图接口增加不同的查询参数，避免浏览器把每个轮播项当成同一张缓存图片。
@@ -7,7 +8,7 @@ const landscapeCarousel = Array.from(
   (_, index) => `https://t.alcy.cc/fj?carousel=${index + 1}`,
 );
 
-export const backgroundWallpaper: BackgroundWallpaperConfig = {
+export const backgroundWallpaper: BackgroundWallpaperConfig = applyAdminConfig("backgroundWallpaper", {
   // 壁纸模式："banner" 横幅壁纸，"fullscreen" 全屏壁纸，"overlay" 全屏透明，"none" 纯色背景无壁纸
   mode: "banner",
   // 是否允许用户通过导航栏切换壁纸模式
@@ -184,4 +185,4 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
     // 图片位置
     position: "center",
   },
-};
+});

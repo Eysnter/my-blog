@@ -1,7 +1,8 @@
+import { applyAdminConfig } from "./admin-runtime";
 import type { MusicPlayerConfig } from "../types/config";
 
 // 音乐播放器配置
-export const musicPlayerConfig: MusicPlayerConfig = {
+export const musicPlayerConfig: MusicPlayerConfig = applyAdminConfig("musicPlayerConfig", {
   // 禁用音乐播放器方法：
   // 模板默认侧边栏和导航栏两个都显示
   // 1. 侧边栏：在sidebarConfig.ts侧边栏配置把音乐组件enable设为false禁用即可
@@ -61,4 +62,4 @@ export const musicPlayerConfig: MusicPlayerConfig = {
       },
     ],
   },
-};
+});

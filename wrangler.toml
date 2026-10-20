@@ -1,8 +1,25 @@
 name = "firefly"
-compatibility_date = "2025-05-26" # 更为今日
+main = "./worker/src/index.ts"
+compatibility_date = "2026-10-20"
 
 [assets]
 directory = "./dist"
+binding = "ASSETS"
+run_worker_first = ["/api/admin/*", "/media/*"]
 
 [vars]
 NODE_VERSION = "22"
+GITHUB_OWNER = "Eysnter"
+GITHUB_REPO = "my-blog"
+GITHUB_BRANCH = "main"
+MEDIA_PUBLIC_BASE = "https://img.eysnter.cn"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "firefly-admin"
+database_id = "84131f0d-7861-49ae-9e91-0770ac5ae7b6"
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "firefly-media"

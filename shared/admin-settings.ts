@@ -1,0 +1,105 @@
+export const settingsGroups = [
+	{ id: "site", title: "站点与外观", description: "标题、主题色、文章布局、页面开关与导航栏外观。", keys: ["siteConfig"] },
+	{ id: "wallpaper", title: "背景与横幅", description: "桌面 / 手机壁纸、轮播、首页标题和各页面副标题。", keys: ["backgroundWallpaper"] },
+	{ id: "sidebar", title: "侧栏与组件", description: "调整左右侧栏和移动端组件的顺序、显示位置与开关。", keys: ["sidebarLayoutConfig"] },
+	{ id: "navigation", title: "导航菜单", description: "编辑链接、子菜单和顺序；预设项可选择对应页面。", keys: ["navBarConfig", "navBarSearchConfig"] },
+	{ id: "profile", title: "个人资料与公告", description: "头像、签名、社交链接、公告内容和按钮。", keys: ["profileConfig", "announcementConfig"] },
+	{ id: "music", title: "音乐播放器", description: "播放器入口、音量、歌单和歌词。", keys: ["musicPlayerConfig"] },
+	{ id: "effects", title: "特效与看板娘", description: "樱花、雪花、桌宠、Live2D 和 Spine 模型。", keys: ["sakuraConfig", "snowConfig", "desktopPetConfig", "live2dWidgetConfig", "spineModelConfig"] },
+	{ id: "comments", title: "评论系统", description: "选择评论服务，设置前台公开的连接参数。私密密钥请在服务端管理。", keys: ["commentConfig"] },
+	{ id: "friends", title: "友链", description: "友链页面文字、好友资料、排序与显示开关。", keys: ["friendsPageConfig", "friendsConfig"] },
+	{ id: "bookmarks", title: "书签导航", description: "网站分组、地址和图标。新版导航优先使用独立的导航数据。", keys: ["bookmarksPageConfig", "booknavPageConfig", "booknavConfig"] },
+	{ id: "content", title: "内容与渲染", description: "动态、相册、文章封面、代码块、许可证与 PlantUML 图表。", keys: ["dynamicConfig", "galleryConfig", "coverImageConfig", "expressiveCodeConfig", "licenseConfig", "plantumlConfig"] },
+	{ id: "extras", title: "字体与其他", description: "字体、页脚开关、赞助信息和广告内容。", keys: ["fontConfig", "footerConfig", "sponsorConfig", "adConfig1", "adConfig2"] },
+];
+export const settingsLabels: Record<string, string> = {
+	siteConfig:"站点设置", backgroundWallpaper:"背景壁纸", sidebarLayoutConfig:"侧栏布局", navBarConfig:"菜单链接", navBarSearchConfig:"搜索",
+	profileConfig:"个人资料", announcementConfig:"公告", musicPlayerConfig:"播放器", sakuraConfig:"樱花", snowConfig:"雪花",
+	desktopPetConfig:"桌宠", live2dWidgetConfig:"Live2D", spineModelConfig:"Spine", commentConfig:"评论",
+	friendsPageConfig:"友链页面", friendsConfig:"好友列表", bookmarksPageConfig:"原版书签", booknavPageConfig:"新版书签页面",
+	booknavConfig:"新版书签分组", dynamicConfig:"动态", galleryConfig:"相册", coverImageConfig:"文章封面", fontConfig:"字体",
+	footerConfig:"自定义页脚", sponsorConfig:"赞助", adConfig1:"广告 1", adConfig2:"广告 2", expressiveCodeConfig:"代码块样式",
+	licenseConfig:"文章许可证", plantumlConfig:"PlantUML 图表",
+	title:"标题", subtitle:"副标题", description:"描述", site_url:"站点地址", keywords:"关键词", lang:"语言",
+	themeColor:"主题", hue:"色相（0–360）", fixed:"固定主题色", defaultMode:"默认模式", pageWidth:"页面宽度（rem）",
+	articleWidth:"文章宽度（rem）", pageScale:"页面缩放", card:"卡片样式", border:"边框与阴影", followTheme:"跟随主题色",
+	font:"站点字体", favicon:"网站图标", src:"图片 / 资源地址", navbar:"导航栏外观", logo:"标志", type:"类型", value:"内容",
+	alt:"替代文字", widthFull:"全宽", menuAlign:"菜单对齐", stickyNavbar:"固定导航栏", siteStartDate:"建站日期",
+	timezone:"时区", rehypeCallouts:"提示框", theme:"主题", showLastModified:"显示上次编辑", outdatedThreshold:"过期阈值（天）",
+	sharePoster:"分享海报", generateOgImages:"生成分享封面", bilibili:"哔哩哔哩", uid:"用户 UID", pages:"页面开关",
+	friends:"友链", sponsor:"赞助", guestbook:"留言板", gallery:"相册", bookmarks:"书签", dynamic:"动态",
+	projects:"项目", booknav:"新版书签导航", categoryBar:"分类导航", postListLayout:"文章列表布局", mobileDefaultMode:"移动端布局",
+	showTags:"显示标签", descriptionLines:"摘要行数", allowSwitch:"允许切换", grid:"网格", masonry:"瀑布流", columnWidth:"最小列宽（px）",
+	pagination:"分页", postsPerPage:"每页文章数", analytics:"统计服务", imageOptimization:"图片优化", formats:"输出格式", quality:"图片质量",
+	noReferrerDomains:"不发送来源的图片域名", music:"音乐", playlists:"歌单", id:"标识", name:"名称", server:"服务",
+	mode:"模式", switchable:"允许访客切换", desktop:"桌面端", mobile:"移动端", common:"通用效果", dimOpacity:"遮罩深度",
+	homeText:"首页横幅文字", enable:"启用", enabled:"启用", titleSize:"标题字号", subtitleSize:"副标题字号", typewriter:"打字机",
+	speed:"速度", deleteSpeed:"删除速度（ms）", pauseTime:"停顿时间（ms）", pageText:"其他页面横幅文字", transparentMode:"透明模式",
+	enableBlur:"背景模糊", blur:"模糊程度", waves:"水波", gradient:"渐变", height:"高度", banner:"横幅", position:"位置",
+	carousel:"轮播", interval:"间隔（ms）", transitionEffect:"切换效果", overlay:"透明背景", opacity:"不透明度", cardOpacity:"卡片不透明度",
+	fullscreen:"全屏壁纸", zIndex:"层级", tabletSidebar:"平板侧栏", showBothSidebarsOnPostPage:"文章页显示双侧栏",
+	leftComponents:"左侧组件", rightComponents:"右侧组件", mobileBottomComponents:"移动端底部组件", showOnPostPage:"文章页显示",
+	showOnNonPostPage:"其他页面显示", responsive:"响应式", collapseThreshold:"折叠阈值", configId:"配置标识",
+	specificConfig:"组件选项", limit:"数量", showHeatmap:"显示热力图", avatar:"头像地址", bio:"个人签名", links:"链接",
+	url:"链接地址", external:"在新窗口打开", icon:"图标名", showName:"显示名称", content:"内容", closable:"允许关闭",
+	link:"链接按钮", text:"按钮文字", children:"子菜单", method:"搜索方式", showInNavbar:"导航栏播放器", showMiniPlayer:"迷你播放器",
+	volume:"音量（0–1）", playMode:"循环模式", showLyrics:"显示歌词", meting:"Meting 配置", api:"接口地址", fallbackApis:"备用接口",
+	local:"本地音乐", playlist:"曲目", artist:"歌手", cover:"封面", lrc:"歌词", sakuraNum:"樱花数量", flakeCount:"雪花数量",
+	limitTimes:"循环次数", size:"尺寸", min:"最小值", max:"最大值", minSize:"最小尺寸", maxSize:"最大尺寸", horizontal:"水平速度",
+	vertical:"垂直速度", rotation:"旋转速度", fadeSpeed:"消散速度", petWidth:"角色边界宽度", width:"宽度", mobileWidth:"移动端宽度",
+	mobileBreakpoint:"移动端断点（px）", bottom:"底部距离", mobileBottom:"移动端底部距离", model:"模型", path:"文件路径",
+	scale:"缩放", x:"X 偏移", y:"Y 偏移", offsetX:"水平偏移", offsetY:"垂直偏移", corner:"角落",
+	interactive:"交互", clickAnimations:"点击动画", clickMessages:"点击文字", idleAnimations:"待机动画", idleInterval:"待机间隔",
+	messageDisplayTime:"文字停留时间", hideOnMobile:"移动端隐藏", primaryColor:"主题色", transitionDuration:"过渡时间",
+	transitionType:"过渡类型", menus:"菜单", items:"项目", label:"文字", action:"动作", align:"对齐", tips:"提示气泡",
+	welcomeMessage:"欢迎消息", messages:"消息", duration:"持续时间", offset:"偏移", envId:"环境 / 服务地址",
+	visitorCount:"访问量", jsUrl:"脚本地址", cssUrl:"样式地址", serverURL:"服务地址", emoji:"表情", login:"登录模式",
+	locale:"语言", repo:"仓库", repoId:"仓库 ID", category:"分类", categoryId:"分类 ID", mapping:"映射方式", strict:"严格匹配",
+	reactionsEnabled:"表情回应", emitMetadata:"输出元数据", inputPosition:"输入框位置", loading:"加载方式", shortname:"站点简称",
+	showCustomContent:"显示自定义内容", showComment:"显示评论", randomizeSort:"随机排序", imgurl:"头像地址", desc:"简介",
+	siteurl:"站点地址", tags:"标签", weight:"排序权重", categories:"分类", groups:"分组", sites:"网站", subcategories:"子分类",
+	profileUrl:"个人页链接", itemsPerPage:"每页数量", apiUrl:"数据接口", memos:"Memos", parent:"用户标识",
+	albums:"相册", location:"拍摄地点", date:"日期", passwordHint:"密码提示", enableInPost:"文章页显示封面",
+	randomCoverImage:"随机封面", apis:"接口列表", fallback:"备用资源", showLoading:"加载动画", preload:"预加载",
+	selected:"已选字体", fonts:"字体库", family:"字体名", display:"加载策略", usage:"用途说明", showSponsorsList:"显示赞助者",
+	showButtonInPost:"文章页赞助按钮", methods:"赞助方式", qrCode:"二维码", sponsors:"赞助者", amount:"金额",
+	displayCount:"展示次数", padding:"内边距", all:"全部", top:"上", right:"右", left:"左", darkTheme:"深色主题",
+	lightTheme:"浅色主题", pluginCollapsible:"代码折叠", lineThreshold:"折叠行数阈值", previewLines:"预览行数",
+	defaultCollapsed:"默认折叠", pluginLanguageBadge:"语言徽章",
+};
+const choices: Record<string, string[]> = {
+	"siteConfig.lang":["zh_CN","zh_TW","en","ja","ru"],
+	"siteConfig.themeColor.defaultMode":["system","light","dark"],
+	"siteConfig.navbar.logo.type":["image","icon","url"],
+	"siteConfig.navbar.menuAlign":["left","center"],
+	"siteConfig.postListLayout.defaultMode":["grid","list"], "siteConfig.postListLayout.mobileDefaultMode":["grid","list"],
+	"siteConfig.imageOptimization.formats":["webp","avif","both"],
+	"siteConfig.rehypeCallouts.theme":["github","obsidian","vitepress"],
+	"sidebarLayoutConfig.position":["left","right","both"],"sidebarLayoutConfig.tabletSidebar":["left","right"],
+	"backgroundWallpaper.mode":["banner","fullscreen","overlay","none"],
+	"backgroundWallpaper.banner.carousel.transitionEffect":["fade","zoom","slide"],
+	"backgroundWallpaper.common.navbar.transparentMode":["semi","full","semifull"],
+	"musicPlayerConfig.mode":["meting","local"],"musicPlayerConfig.playMode":["list","one","random"],
+	"commentConfig.type":["none","twikoo","waline","giscus","disqus","artalk"],
+	"commentConfig.waline.login":["enable","force","disable"],
+	"live2dWidgetConfig.position":["bottom-left","bottom-right"],
+};
+export const widgetTypes = ["profile","announcement","music","categories","tags","advertisement","dynamic","quoteOfTheDay","stats","calendar","schedule","sidebarToc"];
+export function fieldChoices(path: string): string[] | undefined {
+	if (/^sidebarLayoutConfig\.(leftComponents|rightComponents|mobileBottomComponents)\.\d+\.type$/.test(path)) return widgetTypes;
+	if (/^sidebarLayoutConfig\.(leftComponents|rightComponents)\.\d+\.position$/.test(path)) return ["top","sticky"];
+	return choices[path];
+}
+export function fieldBounds(path: string): [number, number] | undefined {
+	const bounds: Record<string,[number,number]> = {
+		"siteConfig.pageWidth":[40,160], "siteConfig.articleWidth":[30,130], "siteConfig.pageScale":[0.5,2],
+		"siteConfig.themeColor.hue":[0,360], "siteConfig.pagination.postsPerPage":[1,100],
+		"siteConfig.postListLayout.grid.columnWidth":[180,800], "siteConfig.postListLayout.descriptionLines":[0,20],
+		"siteConfig.imageOptimization.quality":[1,100], "backgroundWallpaper.banner.carousel.interval":[1500,120000],
+		"musicPlayerConfig.volume":[0,1], "sakuraConfig.sakuraNum":[0,150], "snowConfig.flakeCount":[0,300],
+	};
+	return bounds[path];
+}
+export function isPrivateField(key: string) {
+	return /^(password|passwordHint|auth|token|secret|apiKey)$/i.test(key);
+}

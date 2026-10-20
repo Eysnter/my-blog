@@ -1,0 +1,8 @@
+# Copy this file to .dev.vars for local development only.
+# Generate unique random values; never reuse production secrets here.
+PASSWORD_PEPPER=replace-with-a-random-local-value
+ADMIN_SETUP_TOKEN=replace-with-a-one-time-local-token
+GITHUB_TOKEN=replace-with-a-fine-grained-github-token
+
+# Optional: enable Cloudflare Turnstile verification on the login endpoint.
+# TURNSTILE_SECRET_KEY=replace-with-your-turnstile-secret

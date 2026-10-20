@@ -1,6 +1,7 @@
+import { applyAdminConfig } from "./admin-runtime";
 import type { ProfileConfig } from "../types/config";
 
-export const profileConfig: ProfileConfig = {
+export const profileConfig: ProfileConfig = applyAdminConfig("profileConfig", {
   // 头像
   // 图片路径支持三种格式：
   // 1. public 目录（以 "/" 开头，不优化）："/assets/images/avatar.webp"
@@ -46,4 +47,4 @@ export const profileConfig: ProfileConfig = {
       showName: false,
     },
   ],
-};
+});

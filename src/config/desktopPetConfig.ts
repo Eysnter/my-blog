@@ -1,6 +1,7 @@
+import { applyAdminConfig } from "./admin-runtime";
 import type { DesktopPetConfig } from "../types/config";
 
-export const desktopPetConfig: DesktopPetConfig = {
+export const desktopPetConfig: DesktopPetConfig = applyAdminConfig("desktopPetConfig", {
   // 是否启用桌宠功能
   enable: true,
 
@@ -33,4 +34,4 @@ export const desktopPetConfig: DesktopPetConfig = {
 
   // 移动端距离页面底部的偏移量（像素）
   mobileBottom: 0,
-};
+});
